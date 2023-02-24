@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Principal.xhtml">
+
+            <ui:define name="content">
+                #{beanPrincipal3.setEsDialogoAgregarDeServidoresFalse()}
+                <h:form id="formCrear">    
+                    <p:growl id="mensajesCrear" />
+                    <!--   <p:textEditor secure="false" id="editor" widgetVar="editorWidget" value="# {editorView.text}" ></p:textEditor>
+                     <p:commandButton value="Submit"  action="# {editorView.guardarPublicacion()}" icon="ui-icon-disk" />
+                    panelStyle="width:250px" style="max-width:200px;"
+                   #j_idt9 > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)
+                    width: 200%; style="width: 100%;" table
+                    #formCrear\:panelGridTopCrear > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)
+                    -->
+                    <style>
+                        #formCrear\:panelGridTopCrear > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2){
+                            width: 200%;
+                        }
+                    </style>
+                        <h:panelGrid id="panelGridTopCrear" class="topCrear" columns="4" cellpadding="6">
+                        
+                        
+                         <p:outputLabel value="Titulo:" />
+                         <p:inputText  value="#{beanCrearPublicacion3.titulo}"  style="width: 100%;" />
+                         <p:selectCheckboxMenu id="menuTemas" value="#{beanCrearPublicacion3.temasSeleccionados}" label="Temas"
+                                              filter="true" filterMatchMode="contains" >
+                            <f:selectItems value="#{beanCrearPublicacion3.temasTodos}" />
+                        </p:selectCheckboxMenu>
+                         <p:commandButton value="Publicar"  action="#{beanCrearPublicacion3.guardarPublicacion()}" icon="ui-icon-disk" update="mensajesCrear" /> 
+                    </h:panelGrid> 
+                    <p:textEditor secure="false" id="editor" widgetVar="editorWidget" value="#{beanCrearPublicacion3.text}" ></p:textEditor>
+                    
+                </h:form> 
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

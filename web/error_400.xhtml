@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Alerta</title>
+        <link rel="stylesheet" type="text/css" href="css/cssErro.css"/>
+        <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/RENE_boostrap.css"/>
+	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/My Computer (2).ico" />
+    </h:head>
+    <h:body >
+      
+        <div class="layout-error">
+            <div class="layout-error-message-box text-white ">
+              <div class="pl-4">
+                <h1 class="display-4 alert-heading">Peticion Erronea!</h1>
+  
+  <p class="lead">La solicitud contiene una sintaxis errónea y no debería repetirse. </p>
+  <!-- <hr class="my-4 bg-white">
+  <p>Por favor regrese a la nuestra página de loguin para que retome su cuenta </p> -->
+ <h:form>
+      <h:commandButton class="btn btn-outline-light btn-lg" action="login.faces" value="Regresar!!" ></h:commandButton>
+  </h:form>
+
+              </div>
+                
+            </div>
+        </div>
+        
+	
+    </h:body>
+</html>
+

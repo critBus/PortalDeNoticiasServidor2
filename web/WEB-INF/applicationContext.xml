@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config='true'>
+        <!--Pages where all user have access-->
+        <security:intercept-url pattern="/login.faces" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/assets/**" access="ROLE_ADMIN,ROLE_USER,IS_AUTHENTICATED_ANONYMOUSLY"/>        
+        <security:intercept-url pattern="/Inicio.faces" access="ROLE_ADMIN,ROLE_USER"/>           
+        <security:intercept-url pattern="/Principal.faces" access="ROLE_ADMIN,ROLE_USER"/>
+        <security:intercept-url pattern="/CrearPublicacion.faces" access="ROLE_ADMIN,ROLE_USER"/>
+        <security:intercept-url pattern="/TodasLasPublicaciones.faces" access="ROLE_ADMIN,ROLE_USER"/>
+         <security:intercept-url pattern="/GestionDeUsuarios.faces" access="ROLE_ADMIN"/>
+         <security:intercept-url pattern="/GestionDeServidores.faces" access="ROLE_ADMIN"/>
+        
+        <security:intercept-url pattern="/index.xhtml" access="ROLE_ADMIN,ROLE_USER"/>           
+        
+        <!--Pages where user's role have access-->
+        
+        <!--Pages where admin's role have access
+        <security:intercept-url pattern="/Users.faces" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/servers.faces" access="ROLE_ADMIN"/> -->
+
+        <!--Configuration of login and logout pages-->
+        <security:form-login login-page='/login.faces' default-target-url='/Inicio.faces'
+                             always-use-default-target='true'/>
+        <security:logout logout-success-url="/login.faces" delete-cookies="JSESSIONID"/>
+        
+        
+        <!--One user only use 2 session max-->
+        <security:session-management>
+            <security:concurrency-control max-sessions="2"/>
+            <!--<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>-->
+        </security:session-management>
+    </security:http>
+
+    <!--Configuation of autentication mannager and security encrypt-->
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:jdbc-user-service data-source-ref="securityDataSource"/>
+            <security:password-encoder hash="sha">
+                <!--<security:password-encoder hash="sha-256">-->
+                <!-- <security:salt-source user-property="username"/> -->
+            </security:password-encoder>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!--Configuration of DB source to login-->
+    <bean id="securityDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/Noticias2"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="rene"/>
+    </bean>
+</beans>

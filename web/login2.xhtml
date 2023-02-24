@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+
+       <title>Portal de Noticias</title>
+
+        <!-- Bootstrap core CSS 
+        <link href="assets/css/bootstrap.css" rel="stylesheet"/>  -->
+        <!--external css
+        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" /> -->
+
+        <!-- Custom styles for this template 
+        <link href="assets/css/style.css" rel="stylesheet"/>
+        <link href="assets/css/style-responsive.css" rel="stylesheet"/> -->
+    </h:head>
+    <h:body> 
+        <h:form id="formInicio">
+        <p:remoteCommand name="irAInicio" actionListener="#{beanLogin3.apretoLogin()}" />
+        <h:inputText id="entradaUsuario" value="#{beanLogin3.cuenta}"   a:placeholder="Usuario" a:autofocus="true" class="form-control"/>
+        <h:inputText id="entradaContra" value="#{beanLogin3.contraseña}"   a:placeholder="Usuario" a:autofocus="true" class="form-control"/>
+        <h:commandButton action="#{beanLogin3.exper()}" value="Exp"   />
+        </h:form>
+        #{beanLogin3.iniEA()}
+        <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+
+        <div id="login-page">
+            <div class="container">
+
+                <form id="loginForm" class="form-login" action="${facesContext.externalContext.requestContextPath}/j_spring_security_check" method="post">
+                    <h2 class="form-login-heading">Iniciar</h2>
+                    <div class="login-wrap">
+                        <div class="row">
+                            <div class="col col-sm-12">
+                                <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+                                    <div class="alert-danger">
+                                        ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+                                    </div>
+                                </c:if>
+                            </div>
+                        </div>
+                        <h:inputText  onkeyup="alEscribir();"  id="j_username" a:required="true" a:placeholder="Usuario" a:autofocus="true" class="form-control"/>
+                        <br></br>
+                        <h:inputSecret onkeyup="alEscribir();"  id="j_password" a:required="true" a:placeholder="Contrase&ntilde;a" class="form-control"/>
+                        <br/><br/>
+                       <!-- <h:commandButton  action="# {beanLogin3.apretoLogin()}" value="Login"   type="submit"/> -->
+                         <button onclick="alert('asd'); alEscribir(); irAInicio();" class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i>&nbsp;&nbsp;Iniciar</button>
+                    </div>
+                </form>	  	
+                
+
+               <!-- # {startBean.startServer()} -->
+            </div>
+        </div>
+
+        <script>
+            function alEscribir() {
+    document.getElementById("formInicio:entradaUsuario").value=document.getElementById("j_username").value;
+    document.getElementById("formInicio:entradaContra").value=document.getElementById("j_password").value;
+    console.log(document.getElementById("formInicio:entradaUsuario").value);
+}
+        </script>
+        
+        <!-- js placed at the end of the document so the pages load faster 
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script> -->
+
+        <!--BACKSTRETCH-->
+        <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.
+        <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+        <script>
+            $.backstretch("images/login-bg.jpg", {speed: 500});
+        </script> -->
+
+    </h:body>
+</html>
+

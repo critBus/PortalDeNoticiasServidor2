@@ -1,0 +1,791 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+       <title>Portal de Noticias</title>
+     <!--   <link type="text/css" rel="stylesheet" href="resources/fa/font-awesome.css_2.css"/>
+        <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet" /> -->
+     <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/My Computer (2).ico" />
+            <link href="dist/css/css.css" rel="stylesheet"/>
+            <link href="css/elegant-icons-style.css" rel="stylesheet" />
+            <link href="css/RENE_boostrap Alertas rojas.css" rel="stylesheet" type="text/css"/>
+             <style>
+            .fas{
+                width: 27px;
+                padding-left: 3px;
+                padding-bottom: 3px;
+            }
+            .far{
+                padding-right: 4px;
+                padding-bottom: 6px;
+            }
+        </style>
+        <style>
+            .ui-button-icon-only > .fas{
+
+                left: 13px;
+                margin-left: 0px;
+                padding-bottom: 5px;
+            }
+        </style>
+            <style>
+                html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+}
+html {
+    font-size: 62.5%;
+}
+*, ::before, ::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+body {
+    font-family: Lato;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #2b2b2b;
+    background-color: #ffffff;
+}
+body {
+    color: 
+    #797979;
+    background: #eeeeee;
+    font-family: 'Lato', sans-serif;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 14px !important;
+}
+/* */
+                .login-img3-body {
+    background: url('resources/img/fondos/bg-1.jpg') no-repeat center center fixed;
+        background-size: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+
+
+
+            </style>
+<style>
+    
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.container {
+    max-width: 750px;
+}
+    .container {
+    max-width: 970px;
+}
+   .container {
+    max-width: 1170px;
+}
+
+
+
+
+.login-wrap {
+    padding: 20px;
+}
+
+.login-form {
+    max-width: 350px;
+    margin: 200px auto 0;
+    background: #d5d7de;
+}
+.login-img3-body .login-form {
+    border: 1px solid 
+#B0B6BE;
+background:
+    rgba(213,215,222,0.9);
+}
+.container::before, .container::after {
+    content: " ";
+    display: table;
+}
+.container::before, .container::after {
+    content: " ";
+    display: table;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.login-form .input-group {
+    padding-bottom: 15px;
+}
+.login-form p {
+    text-align: center;
+    color: #b6b6b6;
+    font-size: 16px;
+    font-weight: 300;
+    
+    margin: 0 0 10px;
+}
+.login-form .login-img {
+    font-size: 50px;
+    font-weight: 300;
+}
+.login-img3-body .login-form p, .login-img2-body .login-form p {
+    color: 
+    #34aadc;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    text-align: center;
+    background-color: #f7f7f7;
+    border: 1px solid #c7c7cc;
+    border-radius: 4px;
+}
+.input-group-addon:first-child {
+    border-right: 0;
+    
+    border-bottom-right-radius: 0;
+border-top-right-radius: 0;
+    
+}
+.login-form .input-group-addon {
+    padding: 6px 12px;
+    font-size: 16px;
+    color: 
+#8b9199;
+font-weight: normal;
+line-height: 1;
+text-align: center;
+background-color:
+    #ffffff;
+    border: none;
+    border-radius: 0;
+}
+
+
+
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: 
+#8e8e93;
+vertical-align: middle;
+background-color:
+    #ffffff;
+    border: 1px solid #c7c7cc;
+    border-radius: 4px;
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    
+    background-image: none;
+    
+    font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+
+font-family: inherit;
+font-size: 100%;
+margin: 0;
+    margin-bottom: 0px;
+}
+.input-group .form-control {
+    width: 100%;
+    margin-bottom: 0;
+}
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+.login-form .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.login-form input[type="text"], .login-form input[type="password"] {
+    border: none;
+    box-shadow: none;
+    font-size: 16px;
+    border-radius: 0;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+}
+.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child > .btn, .input-group-btn:last-child > .dropdown-toggle, .input-group-btn:first-child > .btn:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+
+
+
+
+
+.radio, .checkbox {
+    display: block;
+    min-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    vertical-align: middle;
+    
+     font-weight: 300;
+     
+      display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.checkbox, .checkbox:hover, .checkbox:focus {
+    border: none;
+}
+.login-form .checkbox {
+    margin-bottom: 14px;
+}
+.login-form .checkbox {
+    font-weight: normal;
+    font-weight: 300;
+    font-family: 'Lato', sans-serif;
+}
+
+/* */
+.checkbox input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+.checkbox input[type="checkbox"] {
+    margin: 4px 0 0;
+        margin-left: 0px;
+    margin-top: 1px \9;
+    line-height: normal;
+}
+.checkbox input[type="checkbox"]{
+    float: left;
+margin-left: -20px;
+
+ackground-image: none;
+font-family: inherit;
+font-size: inherit;
+}
+
+
+.pull-right {
+    float: right !important;
+}
+
+.login-form a {
+    color: 
+    #688a7e !important;
+    
+    text-decoration: none;
+outline: none;
+outline: 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid 
+    transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    border-radius: 4px;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    font-weight: 300;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    transition: all 0.15s;
+    
+    background-image: none;
+    font-family: inherit;
+    
+    -webkit-appearance: button;
+cursor: pointer;
+text-transform: none;
+
+font-family: inherit;
+font-size: 100%;
+margin: 0;
+    margin-bottom: 0px;
+}
+
+.btn-primary {
+    color: 
+#ffffff;
+background-color:
+#007aff;
+border-color:
+    #007aff;
+}
+.btn-lg {
+    padding: 10px 16px;
+        padding-right: 16px;
+        padding-left: 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+.btn-block {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+.login-form .btn {
+    border-radius: 0;
+}
+
+
+
+
+.btn-info {
+    color: 
+#ffffff;
+background-color:
+#34aadc;
+border-color:
+    #34aadc;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.container::after {
+    clear: both;
+}
+.container::before, .container::after {
+    content: " ";
+    display: table;
+}
+.container::after {
+    clear: both;
+}
+
+/* */
+
+.btn:hover, .btn:focus {
+    color: #2b2b2b;
+    text-decoration: none;
+}
+
+.btn:hover, .btn:focus {
+    color: #2b2b2b;
+    text-decoration: none;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: 
+#007aff;
+border-color:
+#007aff;
+background:
+    transparent;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+    color: 
+#34aadc;
+background:
+transparent;
+border-color:
+    #34aadc;
+}
+
+.btn-block + .btn-block {
+    margin-top: 5px;
+}
+/* */
+</style>
+            <style>
+                
+.icon_lock_alt , .icon_key_alt , .icon_profile{
+    font-family: 'ElegantIcons';
+speak: none;
+font-style: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+}
+
+                .icon_lock_alt::before {
+    content: "\7e";
+}
+.icon_profile::before {
+    content: "\e08a";
+}
+.icon_key_alt::before {
+    content: "\e001";
+}
+/* beanPrincipal3 */
+            </style>
+   </h:head>
+    <h:body class="login-img3-body">
+    <!-- # {beanLogin3.iniEA()}
+ <h:form  id="formMes"  >
+       <p:growl id="mensaj"/>
+       <p:outputLabel value="# {beanLogin3.getLeras()}" />
+       <p:remoteCommand name="mostarMensaje"  actionListener="# {beanLogin3.mostrarMensaje()}" update=":formMes"  />
+     
+       <p:remoteCommand name="actualizarMen" update=":formMes" />
+  </h:form> onmouseover="moverRaton();" -->
+        <div class="container" >
+<!--# {beanLogin3.resetear()}  -->
+<!--<center><span style="
+              font-size: 60px;
+font-weight: 300;
+color:
+#00a0df;
+float: inherit;
+margin-top: 15px;
+text-transform: uppercase;
+text-decoration: none;
+outline: none;
+outline: 0;
+box-sizing: border-box;
+font-family: 'Lato', sans-serif;
+line-height: 1.428571429;
+margin-right: 0px;
+margin-left: 0px;
+position: fixed;
+width: 100%;
+left: 0px;
+right: 0px;
+">Servidor</span></center>-->
+ 
+<!--<h:form id="formInicio" style="display: none">
+
+        <p:remoteCommand name="irAInicio" actionListener="# {beanLogin3.apretoLogin()}" />
+        <h:inputText id="entradaUsuario" value="# {beanLogin3.cuenta}"   a:placeholder="Usuario" a:autofocus="true" class="form-control"/>
+        <h:inputText id="entradaContra" value="# {beanLogin3.contraseña}"   a:placeholder="Usuario" a:autofocus="true" class="form-control"/>
+
+        </h:form>-->
+        #{beanLogin3.iniEA()}
+        #{beanLogin3.salioDelLoginTrue()}
+
+      <form style="display: none"  id="formLogin" class="login-form"   action="${facesContext.externalContext.requestContextPath}/j_spring_security_check" method="post">
+          
+        
+<!--           <c:if test="$ {SPRING_SECURITY_LAST_EXCEPTION != null}">
+               <div class="alert alert-danger" role="alert" style="text-align: center">
+                                        $ {sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message} 
+                                   Usuario o Contraseña incorrectas
+                                    </div>
+                                </c:if> -->
+      <div class="login-wrap">
+        <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <h:inputText   class="form-control"  id="j_username" a:required="true" a:placeholder="Usuario" a:autofocus="true"/>
+        <!-- value="# {beanLogin3.cuenta}" id="TextCuenta"  <input type="text" class="form-control" placeholder="Username" autofocus="true"/> -->
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <h:inputSecret     class="form-control" id="j_password" a:required="true" a:placeholder="Contrase&ntilde;a" />
+        <!-- value="# {beanLogin3.contraseña}" id="TextContra"  <input type="password" class="form-control" placeholder="Password"></input> -->
+        </div>
+<!--        <script>
+            document.getElementById('formLogin:TextCuenta').placeholder='Cuenta';
+            document.getElementById('formLogin:TextContra').placeholder='Contraseña';
+        
+        </script>-->
+     
+<h:commandButton type="submit"   value="Login" class="btn btn-primary btn-lg btn-block"  >
+<!--        <p:ajax event="mouseup" update="formLogin"  /> action="# {beanLogin3.apretoLogin()}"-->
+       </h:commandButton>
+      
+      </div>
+          
+    </form>
+   
+
+<!--aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+<h:form id="formLoginVista" class="login-form"  >
+          
+        
+           <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+               <div class="alert alert-danger" role="alert" style="text-align: center">
+<!--                                        $ {sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message} -->
+                                   Usuario o Contraseña incorrectas
+                                    </div>
+                                </c:if> 
+      <div class="login-wrap">
+        <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <h:inputText value="#{beanLogin3.cuenta}"   class="form-control"  id="vista_username" required="true" a:placeholder="Usuario" />
+        <!-- value="# {beanLogin3.cuenta}" id="TextCuenta"  <input type="text" class="form-control" placeholder="Username" autofocus="true"/> -->
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <h:inputSecret value="#{beanLogin3.contraseña}"  class="form-control" id="vista_password" required="true" a:placeholder="Contrase&ntilde;a" />
+        <!-- value="# {beanLogin3.contraseña}" id="TextContra"  <input type="password" class="form-control" placeholder="Password"></input> -->
+        </div>
+<!--        <script>
+            document.getElementById('formLogin:TextCuenta').placeholder='Cuenta';
+            document.getElementById('formLogin:TextContra').placeholder='Contraseña';
+        
+        </script>-->
+     
+<p:commandButton action="#{beanLogin3.apretoLogin()}"    value="Login" class="btn btn-primary btn-lg btn-block"  >
+<!--        <p:ajax event="mouseup" update="formLogin"  /> action="# {beanLogin3.apretoLogin()}"-->
+       </p:commandButton>
+      
+      </div>
+          
+    </h:form>
+
+
+
+<script>
+            function logear() {
+              //  console.log('algo');
+            //    alert('hola');
+    document.getElementById("j_username").value=document.getElementById("formLoginVista:vista_username").value;
+    document.getElementById("j_password").value=document.getElementById("formLoginVista:vista_password").value;
+    
+   // a=document.getElementById("j_username").value;
+   // b=document.getElementById("j_password").value;
+  //  alert(a+' '+b);
+    c=document.getElementById("formLogin");
+     //console.log(c);
+    c.submit();
+}
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h:form  id="formLogin" class="login-form" >
+          
+          <p:growl id="msj"/>
+      <div class="login-wrap">
+        <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <h:inputText  value="# {beanLogin3.cuenta}" id="TextCuenta"   class="form-control" />
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <h:inputSecret  value="# {beanLogin3.contraseña}" id="TextContra"   class="form-control"  />
+        </div>
+        <script>
+            document.getElementById('formLogin:TextCuenta').placeholder='Cuenta';
+            document.getElementById('formLogin:TextContra').placeholder='Contraseña';
+        
+        </script>
+        <label class="checkbox" style="width: 100%;">
+           <p:remoteCommand name="recordar"  actionListener="# {beanLogin3.apretoRecordarContraseña()}"   />
+            <span class="pull-right"> <a style="cursor: pointer;" onclick="recordar();"> Olvidaste la Contraseña?</a></span>
+            </label>
+       <h:commandButton  action="# {beanLogin3.apretoLogin()}" value="Login" class="btn btn-primary btn-lg btn-block"  >
+        <p:ajax event="mouseup" update="formLogin"  />
+       </h:commandButton>
+       <h:commandButton action="# {beanLogin3.apretoCrearCuenta()}" value="Crear Cuenta" class="btn btn-info btn-lg btn-block"  >
+       </h:commandButton>
+      </div>
+          
+    </h:form>-->
+   
+
+
+
+
+  </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<!--  <p:importConstants id="id1" type="Util.EAc" var="EA" />
+     <h:form id="forAdd" >
+            <p:growl id="msgAdd"/>
+               
+            <p:dialog header="Agregar usuario" widgetVar="# {EA.DLG_AGREGAR_USUARIO_LOGUIN}" width="900"
+                      showEffect="bounce" draggable="false" resizable="false"
+                      modal="true" closable="false">
+                # {beanDialgoAgregarUsuario3.resetearUsuario()}
+                <h:panelGrid style="width: 100%" cellpadding="10" cellspacing="5" columns="4">
+                    <h:outputText value="Usuario"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialgoAgregarUsuario3.usuario.username}" autocomplete="true"/>
+                    <h:outputText value="Identificaci&oacute;n"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialgoAgregarUsuario3.usuario.identificacion}" autocomplete="true"/>
+
+                    <h:outputText value="Nombre"/>
+                    <p:inputText   style="width: 100%" value="# {beanDialgoAgregarUsuario3.usuario.nombre}" autocomplete="true"/>
+                    <h:outputText value="Email"/>
+                    <p:inputText  type="mail" style="width: 100%" value="# {beanDialgoAgregarUsuario3.usuario.email}" autocomplete="true"/>
+
+
+                    <h:outputText value="Primer Apellido"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialgoAgregarUsuario3.usuario.apellido1}" autocomplete="true"/>
+                    <h:outputText value="Segundo apellido"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialgoAgregarUsuario3.usuario.apellido2}" autocomplete="true"/>
+
+                    <h:outputText value="Contrase&ntilde;a"/>
+                    <p:inputText  type="password" style="width: 100%" value="# {beanDialgoAgregarUsuario3.usuario.password}" autocomplete="true"/>
+                    <h:outputText value="Repetir contrase&ntilde;a"/>
+                    <p:inputText  type="password" style="width: 100%" value="# {beanDialgoAgregarUsuario3.reafirmarContra}" autocomplete="true"/>
+
+                  
+
+
+                </h:panelGrid>
+
+               
+
+                <div  style="margin-bottom: 20px; width: 100%" ><center> <h:outputText  value="Descripci&oacute;n"/> <br/></center></div> 
+
+                <p:inputTextarea  style="width: 98.4%" value="# {beanDialgoAgregarUsuario3.usuario.description}"/>
+
+                <f:facet name="footer">
+                    <div style="text-align: right;">
+                        <p:commandButton  value="Cancelar" actionListener="# {beanDialgoAgregarUsuario3.apretoCancelar()}"   update="forAdd" icon="ui-icon-close"/>
+                        <p:commandButton  value="Agregar"  actionListener="# {beanDialgoAgregarUsuario3.apretoAceptar()}" update="msgAdd " icon="ui-icon-check"/>
+                        
+
+                    </div>
+                </f:facet>
+
+
+
+
+            </p:dialog>
+
+        </h:form> 
+
+   <h:form id="forRecordarCon" >
+            <p:growl id="msgAdd2"/>
+            # {beanDialogoRecordarContraseña3.resetearUsuario()}
+            <p:dialog header="Agregar usuario" widgetVar="# {EA.DLG_RECORDAR_CONTRASEÑA_LOGUIN}" width="500"
+                      showEffect="bounce" draggable="false" resizable="false"
+                      modal="true" closable="false">
+                <h:panelGrid style="width: 100%" cellpadding="10" cellspacing="5" columns="2">
+                    <h:outputText value="Usuario"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialogoRecordarContraseña3.usuario.username}" autocomplete="true"/>
+                    <h:outputText value="Identificaci&oacute;n"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialogoRecordarContraseña3.usuario.identificacion}" autocomplete="true"/>
+
+                    <h:outputText value="Nombre"/>
+                    <p:inputText   style="width: 100%" value="# {beanDialogoRecordarContraseña3.usuario.nombre}" autocomplete="true"/>
+                    <h:outputText value="Email"/>
+                    <p:inputText  type="mail" style="width: 100%" value="# {beanDialogoRecordarContraseña3.usuario.email}" autocomplete="true"/>
+
+
+                    <h:outputText value="Primer Apellido"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialogoRecordarContraseña3.usuario.apellido1}" autocomplete="true"/>
+                    <h:outputText value="Segundo apellido"/>
+                    <p:inputText  style="width: 100%" value="# {beanDialogoRecordarContraseña3.usuario.apellido2}" autocomplete="true"/>
+
+                  
+
+
+                </h:panelGrid>
+
+                <f:facet name="footer">
+                    <div style="text-align: right;">
+                        <p:commandButton  value="Cancelar" actionListener="# {beanDialogoRecordarContraseña3.apretoCancelar()}"   update="forRecordarCon" icon="ui-icon-close"/>
+                        <p:commandButton  value="Recordar Contraseña"  actionListener="# {beanDialogoRecordarContraseña3.apretoRecordar()}" update=":formVerCont" icon="ui-icon-check"/>
+                        
+
+                    </div>
+                </f:facet>
+
+
+
+
+            </p:dialog>
+
+        </h:form> 
+
+  
+    <h:form id="formVerCont" >
+            <p:growl id="msgAdd3"/>
+            # {beanDialogoVerContraseña3.resetear()}
+            <p:dialog header="Contraseña Actual" widgetVar="# {EA.DLG_VER_CONTRASEÑA_LOGUIN}" width="200"
+                      showEffect="bounce" draggable="false" resizable="false"
+                      modal="true" closable="false">
+                <center><p:outputLabel value="# {beanDialogoVerContraseña3.contraseña}"/></center>     
+                <f:facet name="footer">
+                    <div style="text-align: center;">
+                        <p:commandButton  value="Aceptar"  actionListener="# {beanDialogoVerContraseña3.apretoAceptar()}" update="formVerCont " icon="ui-icon-check"/>
+                        
+
+                    </div>
+                </f:facet>
+
+
+
+
+            </p:dialog>
+
+        </h:form> -->
+
+    </h:body>
+    
+</html>
+  

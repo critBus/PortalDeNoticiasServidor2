@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <!-- forAdd  formEdit -->
+        <ui:composition template="./Principal.xhtml">
+
+            <ui:define name="content">
+               #{beanPrincipal3.setEsDialogoAgregarDeServidoresFalse()}
+                <h:form id="form">
+                     <p:importConstants id="id1" type="Util.EAc" var="EA" />
+                    <p:growl id="msg" globalOnly="false" />
+                    <!-- filteredValue="# {beanGestionDeUsuarios3.listaFiltro}"  --> #{beanGestionDeUsuarios3.resetear()}
+                    <p:dataTable widgetVar="datosUsuarios" value="#{beanGestionDeUsuarios3.lista}" var="p" paginator="true" rows="6" editable="true" 
+                                 
+                                 >
+                        <p:ajax event="rowEdit" listener="#{beanGestionDeUsuarios3.actualizar}" update=":form:msg"/>
+                        <p:ajax event="rowEditCancel" listener="#{beanGestionDeUsuarios3.cancelar}" update=":form:msg"/>
+
+                        <f:facet name="header">
+          
+        </f:facet>
+                        
+                        <p:column headerText="Seleccionar">
+                            <center>
+
+                                <p:selectBooleanCheckbox class="text-center" value="#{p.selected}"/>
+                            </center>
+
+                        </p:column>
+          <!-- filterBy="# {p.users.username}" filterMatchMode="contains" sortBy="# {p.users.username}"-->              
+                        <p:column headerText="Cuenta" >
+                            <center>
+
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText class="text-center" value="#{p.users.username}"  />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <h:inputText value="#{beanGestionDeUsuarios3.usuarioEnLista.username}"  />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </center>
+
+                        </p:column>
+                        <!--  filterBy="# {p.users.nombre}" filterMatchMode="contains"  sortBy="# {p.users.nombre}" -->
+                        <p:column headerText="nombre" >
+                            <center>
+
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{p.users.nombre}"  />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <h:inputText class="text-center" value="#{beanGestionDeUsuarios3.usuarioEnLista.nombre}"  />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </center>
+
+                        </p:column>
+                     
+<!-- sortBy="# {p.users.enabled}" filterBy="# {p.users.enabled}" filterMatchMode="contains" sortBy="# {p.users.enabled}"-->
+                        <p:column headerText="Estado"  >
+                            <center>
+
+                                <p:outputLabel class="text-center" style="color:#{beanGestionDeUsuarios3.getColorEstado(p.users.enabled)}" value="#{p.users.enabled}" />
+                            </center>
+
+                        </p:column>
+
+                        <p:column headerText="Opciones">
+                            <style>
+                                .ui-button-icon-only .ui-icon.fa{
+                                    padding-bottom: 5px;padding-right: 5px;
+                                }
+                            </style>
+                            <!--  oncomplete="PF('# {EA.DLG_INFO_USUARIO_GESTION}').show()" oncomplete="PF('# {EA.DLG_EDITAR_USUARIO_GESTION}').show()" -->
+                            <p:commandButton  update=":FormInfo" actionListener="#{beanGestionDeUsuarios3.apretoVerInf(p.users.username)}" icon="fa fa-exclamation-circle" >
+                                <!-- :formEdit <f:setPropertyActionListener value="# {p.users}" target="# {beanGestionDeUsuarios3.usuarioTemporal}" /> -->
+                                
+                            </p:commandButton>
+                            <p:commandButton update=":form :formEdit" actionListener="#{beanGestionDeUsuarios3.apretoEditar(p.users.username)}"  icon="ui-icon-pencil" >
+                               <!-- <f:setPropertyActionListener value="# {p.users}" target="# {beanGestionDeUsuarios3.usuarioTemporal}"/> -->
+                            </p:commandButton>
+                            <p:commandButton action="#{beanGestionDeUsuarios3.eliminar(p.users)}" update=":form :formEast2" icon="ui-icon-trash"> 
+                             <!-- -->   <p:confirm message="¿Seguro que quiere eliminar el usuario?" header="Aviso" icon="ui-icon-alert"/> 
+                            </p:commandButton>
+                        </p:column>
+
+
+
+
+                        <f:facet name="footer">
+
+
+                        </f:facet>
+
+                    </p:dataTable>
+                    <br/>
+                    <p:commandButton value="Eliminar" action="#{beanGestionDeUsuarios3.eliminar()}" update=":form :formEast2" icon="ui-icon-trash">
+                      <!-- -->  <p:confirm message="Seguro eliminar?" header="Aviso" icon="ui-icon-alert"/> 
+                    </p:commandButton>
+                    
+                    <p:commandButton value="Adicionar" update=":forAdd " action="#{beanGestionDeUsuarios3.showDialogAdd()}"  icon="ui-icon-plus"/>
+                    <p:confirmDialog global="true" >
+                        <p:commandButton value="si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>
+                        <p:commandButton value="no" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-no"/>
+                    </p:confirmDialog>
+                </h:form>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

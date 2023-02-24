@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./Principal.xhtml">
+            <ui:define name="sur">
+                #{beanPrincipal3.setEsDialogoAgregarDeServidoresFalse()}
+               <!--  --> <h:form>
+                     <p:selectBooleanButton style="float: left; #{beanTodasLasPublicaciones3.OcultarCBSoloSeguidos()} "  value="#{beanTodasLasPublicaciones3.soloSeguidos}"  offLabel="Ver Solo Publicaciones Que Sigues" onLabel="Ver Todas Las Publicaciones"  >
+                                          <p:ajax update=":form1" listener="#{beanTodasLasPublicaciones3.filtrarPorSeguidos}" />
+                                        </p:selectBooleanButton>
+                    
+
+                </h:form> 
+            </ui:define>
+            <ui:define name="content">
+                
+                <h:form id="form1" style="width:100%; height:100%;"> 
+                    <p:growl id="msgs" />
+                    <p:dataScroller rowIndexVar="varInP" id="todasLasPublicaiones" style="width:100%; height:100%;" value="#{beanTodasLasPublicaciones3.getPublicacionesSeleccionadas()}" var="car" chunkSize="10" buffer="60"   >
+
+                        <p:panel id="toggleable"   widgetVar="panel" style="margin-bottom:20px">
+                            <f:facet  name="header" ><p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;" url="#{beanTodasLasPublicaciones3.getDireccionImagenDeUsuarioPublicacion(car)}" /> #{car.usersusername.username}</f:facet>
+                            <p:ajax event="close" listener="#{beanTodasLasPublicaciones3.onClose}" update=":form1:msgs" />
+                            <p:ajax event="toggle" listener="#{beanTodasLasPublicaciones3.onToggle}" update=":form1:msgs" />
+
+                            <center><h3>#{car.titulo}</h3></center> 
+                            <p:separator/>
+                            <p:repeat value="#{beanTodasLasPublicaciones3.getListaDeTiposDeTemas(car)}" var="nombreTipoDeTema" >
+                                <small>#{beanTodasLasPublicaciones3.getTemasDelTipo(car, nombreTipoDeTema)}<br/></small> 
+                            </p:repeat>
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="Interes:"/>
+                                <p:rating id="interes" value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).clasificacionGeneral}" readonly="true" stars="10" />
+                                <p:outputLabel style="font-size: small;"   value=" Cantidad De Opiniones:"/>
+                                <p:outputLabel style="font-size: small;" id="cantidadDeOpiniones" value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeOpiniones}"/>
+
+                            </h:panelGrid>
+
+                            <p:separator/>
+                        <h:outputText style="max-width: 100%;" id="contenido" value="#{beanTodasLasPublicaciones3.getContenido(car)}"  escape="false"/>
+                            <f:facet  name="footer" >
+
+                                <div style="float: left; width: 50%; #{beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}">
+                                    <h:panelGrid columns="5">
+                                        <p:outputLabel id="labelLike" value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeLikes}" />
+                                        <p:selectBooleanButton id="botonLike"  value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).like}"  onLabel="" offLabel="" onIcon="fas fa-thumbs-up" offIcon="fas fa-thumbs-up" style="width:60px">
+                                            <p:ajax update="botonDislike labelDislike   labelLike interes cantidadDeOpiniones" listener="#{beanTodasLasPublicaciones3.apretoLike(car)}" />
+                                        </p:selectBooleanButton>
+
+                                        <p:outputLabel id="labelDislike"  value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeDislike}" />
+                                        <p:selectBooleanButton id="botonDislike" value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).dislike}"   onLabel="" offLabel="" onIcon="fas fa-thumbs-down" offIcon="fas fa-thumbs-down" style="width:60px">
+                                            <p:ajax update="botonLike labelDislike   labelLike interes cantidadDeOpiniones" listener="#{beanTodasLasPublicaciones3.apretoDislike(car)}" />
+                                        </p:selectBooleanButton>
+
+                                        <p:rating   value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).clasificacionPersonal}" stars="10"   >
+                                            <p:ajax event="rate" listener="#{beanTodasLasPublicaciones3.apretoPuntuacionPersonal(car)}" update="interes cantidadDeOpiniones" />
+                                            <p:ajax event="cancel" listener="#{beanTodasLasPublicaciones3.apretoPuntuacionPersonal(car)}" update="interes cantidadDeOpiniones" />
+                                        </p:rating>
+
+
+                                    </h:panelGrid>
+                                </div>
+
+
+                                <div style="float: left; width: 50%; #{beanTodasLasPublicaciones3.OcultarSiNoPerteneceAUsuarioActual(car)}" >
+                                    <h:panelGrid columns="4">
+                                        <p:outputLabel id="labelLike2" value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeLikes}" />
+                                        <i class="fas fa-thumbs-up" />
+
+
+                                        <p:outputLabel id="labelDislike2"  value="#{beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeDislike}" />
+                                        <i class="fas fa-thumbs-down" />
+
+
+                                    </h:panelGrid>  
+
+                                </div>
+
+                               <div style="text-align: right; margin-top: #{beanTodasLasPublicaciones3.marginTopDeTime(car)}px;">
+                                   <small><p:outputLabel id="cantidadDeComentarios" value="#{beanTodasLasPublicaciones3.getCantidadDeComentarios(car)}" />  Publicado: #{beanTodasLasPublicaciones3.getDateConFormato(car)}</small>  
+                                </div><br/>
+                                <p:dataScroller style="#{beanTodasLasPublicaciones3.OcultarSiNoTieneComentarios(car)}}" id="verComentarios"  value="#{beanTodasLasPublicaciones3.getComentariosDePublicacion(car)}" var="comen" chunkSize="3">
+                                    <f:facet name="loader">
+                                        <p:commandButton type="button" value="Ver Mas" icon="ui-icon-circle-triangle-s"/>
+                                    </f:facet>
+                                    <p:panel id="toggleable2"   widgetVar="panel2" style="margin-bottom:20px">
+                                        <f:facet  name="header" >
+                                            <p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;" url="#{beanTodasLasPublicaciones3.getDireccionImagenDeUsuarioDatosDeComentario(comen)}" /> 
+                                            #{comen.cuenta}
+                                            <p:outputLabel class="right right_content" style="text-align: right; font-size: small;" value="#{beanTodasLasPublicaciones3.getDateConFormato(comen)}" />
+                                        </f:facet>
+                                        <p:outputLabel value="#{comen.contenido}"/>
+                                        <!--  <p:menuitem id="MISubcribirse" update="subMenuComentario :formEast2" style="# {beanTodasLasPublicaciones3.OcultarSiEstaSubscrito(comen)}" value="Subcribirse" actionListener="# {beanTodasLasPublicaciones3.addSubcripcion(comen)}" icon="fas fa-user-plus" >
+                                                        <p:confirm  header="Confirmacion" message="Estas Seguro de Subscribirte?" icon="ui-icon-alert" />
+                                                    </p:menuitem>
+                                                    <p:menuitem id="MIDesubcribirse" update="subMenuComentario :formEast2" style="# {beanTodasLasPublicaciones3.OcultarSiNoEstaSubscrito(comen)}" value="Desubcribirse" actionListener="# {beanTodasLasPublicaciones3.eliminarSubcripcion(comen)}" icon="fas fa-user-times" >
+                                                        <p:confirm header="Confirmacion" message="Estas Seguro de Desubscribirte?" icon="ui-icon-alert" />
+                                                    </p:menuitem> -->
+                                        <f:facet name="options">
+                                            <p:menu id="subMenuComentario">
+                                                <p:submenu label="Opciones">
+                                                    <p:menuitem style="#{beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(comen)}" value="Chat" icon="fas fa-comments" actionListener="#{beanTodasLasPublicaciones3.abrirChat(comen)}"/>
+                                                    
+                                                    <p:menuitem value="Ver Publicaciones" actionListener="#{beanTodasLasPublicaciones3.verSusPublicaciones(comen)}" icon="#{EA.ICON_VER_SUS_PUBLICACIONES}" />
+                                                    <p:menuitem style="#{beanTodasLasPublicaciones3.OcultarSiNoPerteneceAUsuarioActual(comen)}" update="verComentarios" value="Eliminar" actionListener="#{beanTodasLasPublicaciones3.EliminarComentario(comen)}" icon="fas fa-comment-slash" >
+                                                        <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar este Comentario?" icon="ui-icon-alert" />
+                                                    </p:menuitem>
+                                                    </p:submenu>
+                                            </p:menu>
+                                        </f:facet>
+                                    </p:panel>
+                                 
+                                </p:dataScroller>
+                                <div style="#{beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}">
+                                    <p:inputTextarea id="entradaComentario" rows="1" style="width: 72%; margin-right: 4px;" value="#{beanTodasLasPublicaciones3.getDatosDePublicacion(car).comentarioPropio}"/>
+
+                                    <p:commandButton id="botonPublicarComentario" style="width: 26%; bottom: 5px;"  value="Publicar Comentario" actionListener="#{beanTodasLasPublicaciones3.publicarComentario(car)}" update=":form1:msgs verComentarios cantidadDeComentarios entradaComentario"/>
+                                </div>
+                            </f:facet>
+                        <!-- :formEast2 subMenuPublicacion MIDesubcribirse MISubcribirse varInP form1:todasLasPublicaiones:0:MISubcribirse -->
+                       <!--   <p:menuitem id="MISubcribirse" update="# {beanTodasLasPublicaciones3.getUpdateAddSubcripcionEnPublicacion(varInP)}" style="# {beanTodasLasPublicaciones3.OcultarSiEstaSubscrito(car)}" value="Subcribirse" actionListener="# {beanTodasLasPublicaciones3.addSubcripcionPublicacion(car)}" icon="fas fa-user-plus" >
+                                            <p:confirm  header="Confirmacion" message="Estas Seguro de Subscribirte?" icon="ui-icon-alert" />
+                                        </p:menuitem>
+                                        <p:menuitem id="MIDesubcribirse" update="# {beanTodasLasPublicaciones3.getUpdateAddSubcripcionEnPublicacion(varInP)}" style="# {beanTodasLasPublicaciones3.OcultarSiNoEstaSubscrito(car)}" value="Desubcribirse" actionListener="# {beanTodasLasPublicaciones3.eliminarSubcripcionPublicacion(car)}" icon="fas fa-user-times" >
+                                            <p:confirm header="Confirmacion" message="Estas Seguro de Desubscribirte?" icon="ui-icon-alert" />
+                                        </p:menuitem> -->
+                        <f:facet name="options" id="opcionPublicacion">
+                                <p:menu id="subMenuPublicacion">
+                                    <p:submenu label="Opciones">
+                                        <p:menuitem style="#{beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}" value="Chat" icon="fas fa-comments" actionListener="#{beanTodasLasPublicaciones3.abrirChat(car)}"/>
+                                       
+                                        <p:menuitem value="Ver Publicaciones" actionListener="#{beanTodasLasPublicaciones3.verSusPublicaciones(car)}" icon="#{EA.ICON_VER_SUS_PUBLICACIONES}" />
+                                        <p:menuitem style="#{beanTodasLasPublicaciones3.OcultarSiNoPerteneceAUsuarioActual(car)}" update=":form1" value="Eliminar" actionListener="#{beanTodasLasPublicaciones3.EliminarPublicacion(car)}" icon="fas fa-trash-alt" >
+                                            <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar esta Publicacion?" icon="ui-icon-alert" />
+                                        </p:menuitem>
+                                         </p:submenu>
+                                </p:menu>
+                            </f:facet>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:panel>
+                    </p:dataScroller>
+                </h:form>
+                <!--  
+               
+                <h:form id="form1" style="width:100%; height:100%;"> 
+                    <p:growl id="msgs" />
+                    <p:dataScroller style="width:100%; height:100%;" value="# {beanTodasLasPublicaciones3.publicaciones}" var="car" chunkSize="10" buffer="60"   >
+
+                        <p:panel id="toggleable"  toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+                            <f:facet  name="header" ><p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;" url="# {beanTodasLasPublicaciones3.getDatosDePublicacion(car).direccionImagenDeUsuario}" /> # {car.usersusername.username}</f:facet>
+                            <p:ajax event="close" listener="# {beanTodasLasPublicaciones3.onClose}" update=":form1:msgs" />
+                            <p:ajax event="toggle" listener="# {beanTodasLasPublicaciones3.onToggle}" update=":form1:msgs" />
+
+                            <center><h3># {car.titulo}</h3></center> 
+                            <p:separator/>
+                            <p:repeat value="# {beanTodasLasPublicaciones3.getListaDeTiposDeTemas(car)}" var="nombreTipoDeTema" >
+                                <small># {beanTodasLasPublicaciones3.getTemasDelTipo(car, nombreTipoDeTema)}<br/></small> 
+                            </p:repeat>
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="Interes:"/>
+                                <p:rating id="interes" value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).clasificacionGeneral}" readonly="true" stars="10" />
+                                <p:outputLabel style="font-size: small;"   value=" Cantidad De Opiniones:"/>
+                                <p:outputLabel style="font-size: small;" id="cantidadDeOpiniones" value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeOpiniones}"/>
+
+                            </h:panelGrid>
+
+                            <p:separator/>
+                        <h:outputText style="max-width: 100%;" id="contenido" value="# {beanTodasLasPublicaciones3.getContenido(car)}"  escape="false"/>
+                            <f:facet  name="footer" >
+
+                                <div style="float: left; width: 50%; # {beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}">
+                                    <h:panelGrid columns="5">
+                                        <p:outputLabel id="labelLike" value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeLikes}" />
+                                        <p:selectBooleanButton id="botonLike"  value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).like}"  onLabel="" offLabel="" onIcon="fas fa-thumbs-up" offIcon="fas fa-thumbs-up" style="width:60px">
+                                            <p:ajax update="botonDislike labelDislike   labelLike interes cantidadDeOpiniones" listener="# {beanTodasLasPublicaciones3.apretoLike(car)}" />
+                                        </p:selectBooleanButton>
+
+                                        <p:outputLabel id="labelDislike"  value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeDislike}" />
+                                        <p:selectBooleanButton id="botonDislike" value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).dislike}"   onLabel="" offLabel="" onIcon="fas fa-thumbs-down" offIcon="fas fa-thumbs-down" style="width:60px">
+                                            <p:ajax update="botonLike labelDislike   labelLike interes cantidadDeOpiniones" listener="# {beanTodasLasPublicaciones3.apretoDislike(car)}" />
+                                        </p:selectBooleanButton>
+
+                                        <p:rating   value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).clasificacionPersonal}" stars="10"   >
+                                            <p:ajax event="rate" listener="# {beanTodasLasPublicaciones3.apretoPuntuacionPersonal(car)}" update="interes cantidadDeOpiniones" />
+                                            <p:ajax event="cancel" listener="# {beanTodasLasPublicaciones3.apretoPuntuacionPersonal(car)}" update="interes cantidadDeOpiniones" />
+                                        </p:rating>
+
+
+                                    </h:panelGrid>
+                                </div>
+
+
+                                <div style="float: left; width: 50%; # {beanTodasLasPublicaciones3.OcultarSiNoPerteneceAUsuarioActual(car)}" >
+                                    <h:panelGrid columns="4">
+                                        <p:outputLabel id="labelLike2" value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeLikes}" />
+                                        <i class="fas fa-thumbs-up" />
+
+
+                                        <p:outputLabel id="labelDislike2"  value="# {beanTodasLasPublicaciones3.getClasificacionTemporal(car).cantidadDeDislike}" />
+                                        <i class="fas fa-thumbs-down" />
+
+
+                                    </h:panelGrid>  
+
+                                </div>
+
+                               <div style="text-align: right; margin-top: # {beanTodasLasPublicaciones3.marginTopDeTime(car)}px;">
+                                    <small># {beanTodasLasPublicaciones3.getCantidadDeComentarios(car)} Publicado: # {beanTodasLasPublicaciones3.getDateConFormato(car)}</small>  
+                                </div><br/>
+                                <p:dataScroller style="# {beanTodasLasPublicaciones3.OcultarSiNoTieneComentarios(car)}}" id="verComentarios"  value="# {beanTodasLasPublicaciones3.getComentariosDePublicacion(car)}" var="comen" chunkSize="3">
+                                    <f:facet name="loader">
+                                        <p:commandButton type="button" value="Ver Mas" icon="ui-icon-circle-triangle-s"/>
+                                    </f:facet>
+                                    <p:panel id="toggleable2"  toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel2" style="margin-bottom:20px">
+                                        <f:facet  name="header" >
+                                            <p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;" url="# {comen.direccionImagen}" /> 
+                                            # {comen.cuenta}
+                                            <p:outputLabel class="right right_content" style="text-align: right; font-size: small;" value="# {beanTodasLasPublicaciones3.getDateConFormato(comen)}" />
+                                        </f:facet>
+                                        <p:ajax event="close" listener="# {beanTodasLasPublicaciones3.onClose}" update=":form1:msgs" />
+                                        <p:ajax event="toggle" listener="# {beanTodasLasPublicaciones3.onToggle}" update=":form1:msgs" />
+                                        <p:outputLabel value="# {comen.contenido}"/>
+                                        <f:facet name="options">
+                                            <p:menu id="subMenuComentario">
+                                                <p:submenu label="Opciones">
+                                                    <p:menuitem style="# {beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(comen)}" value="Chat" icon="fas fa-comments" actionListener="# {beanTodasLasPublicaciones3.abrirChat(comen)}"/>
+                                                    <p:menuitem id="MISubcribirse" update="subMenuComentario :formEast2" style="# {beanTodasLasPublicaciones3.OcultarSiEstaSubscrito(comen)}" value="Subcribirse" actionListener="# {beanTodasLasPublicaciones3.addSubcripcion(comen)}" icon="fas fa-user-plus" >
+                                                        <p:confirm  header="Confirmacion" message="Estas Seguro de Subscribirte?" icon="ui-icon-alert" />
+                                                    </p:menuitem>
+                                                    <p:menuitem id="MIDesubcribirse" update="subMenuComentario :formEast2" style="# {beanTodasLasPublicaciones3.OcultarSiNoEstaSubscrito(comen)}" value="Desubcribirse" actionListener="# {beanTodasLasPublicaciones3.eliminarSubcripcion(comen)}" icon="fas fa-user-times" >
+                                                        <p:confirm header="Confirmacion" message="Estas Seguro de Desubscribirte?" icon="ui-icon-alert" />
+                                                    </p:menuitem>
+                                                    <p:menuitem value="Ver Publicaciones" actionListener="# {beanTodasLasPublicaciones3.verSusPublicaciones(comen)}" icon="# {EA.ICON_VER_SUS_PUBLICACIONES}" />
+                                                    <p:menuitem style="# {beanTodasLasPublicaciones3.OcultarSiNoPerteneceAUsuarioActual(comen)}" update="verComentarios" value="Eliminar" actionListener="# {beanTodasLasPublicaciones3.EliminarComentario(comen)}" icon="fas fa-comment-slash" >
+                                                        <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar este Comentario?" icon="ui-icon-alert" />
+                                                    </p:menuitem>
+                                                    <p:menuitem value="Minizar/Maximizar" url="#" icon="ui-icon-newwin" onclick="PF('panel2').toggle()" />
+                                                    <p:menuitem value="Ocultar" url="#" icon="ui-icon-close" onclick="PF('panel2').close()" />
+                                                </p:submenu>
+                                            </p:menu>
+                                        </f:facet>
+                                    </p:panel>
+                                 
+                                </p:dataScroller>
+                                <div style="# {beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}">
+                                    <p:inputTextarea rows="1" style="width: 72%; margin-right: 4px;" value="# {beanTodasLasPublicaciones3.getDatosDePublicacion(car).comentarioPropio}"/>
+
+                                    <p:commandButton style="width: 26%; bottom: 5px;"  value="Publicar Comentario" actionListener="# {beanTodasLasPublicaciones3.publicarComentario(car)}" update="verComentarios"/>
+                                </div>
+                            </f:facet>
+                            <f:facet name="options">
+                                <p:menu id="subMenuPublicacion">
+                                    <p:submenu label="Opciones">
+                                        <p:menuitem style="# {beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}" value="Chat" icon="fas fa-comments" actionListener="# {beanTodasLasPublicaciones3.abrirChat(car)}"/>
+                                        <p:menuitem id="MISubcribirse" update="subMenuPublicacion :formEast2" style="# {beanTodasLasPublicaciones3.OcultarSiEstaSubscrito(car)}" value="Subcribirse" actionListener="# {beanTodasLasPublicaciones3.addSubcripcion(car)}" icon="fas fa-user-plus" >
+                                            <p:confirm  header="Confirmacion" message="Estas Seguro de Subscribirte?" icon="ui-icon-alert" />
+                                        </p:menuitem>
+                                        <p:menuitem id="MIDesubcribirse" update="subMenuPublicacion :formEast2" style="# {beanTodasLasPublicaciones3.OcultarSiNoEstaSubscrito(car)}" value="Desubcribirse" actionListener="# {beanTodasLasPublicaciones3.eliminarSubcripcion(car)}" icon="fas fa-user-times" >
+                                            <p:confirm header="Confirmacion" message="Estas Seguro de Desubscribirte?" icon="ui-icon-alert" />
+                                        </p:menuitem>
+                                        <p:menuitem value="Ver Publicaciones" actionListener="# {beanTodasLasPublicaciones3.verSusPublicaciones(car)}" icon="# {EA.ICON_VER_SUS_PUBLICACIONES}" />
+                                        <p:menuitem style="# {beanTodasLasPublicaciones3.OcultarSiNoPerteneceAUsuarioActual(car)}" update=":form1" value="Eliminar" actionListener="# {beanTodasLasPublicaciones3.EliminarPublicacion(car)}" icon="fas fa-trash-alt" >
+                                            <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar esta Publicacion?" icon="ui-icon-alert" />
+                                        </p:menuitem>
+                                        <p:menuitem value="Minizar/Maximizar" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
+                                        <p:menuitem value="Ocultar" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
+                                    </p:submenu>
+                                </p:menu>
+                            </f:facet>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:panel>
+                    </p:dataScroller>
+                </h:form>
+  --> 
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

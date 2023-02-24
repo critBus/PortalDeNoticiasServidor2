@@ -1,0 +1,1237 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    >
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--        <h:outputStylesheet  name="resources/css/default.css"/>
+        <h:outputStylesheet name="resources/css/cssLayout.css"/>-->
+<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/My Computer (2).ico" />
+        <link href="dist/css/css.css" rel="stylesheet"/>
+        <!-- 
+        <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="dist/css/style.min.css" rel="stylesheet"/> -->
+        <title>Portal de Noticias</title>
+        <style>
+            .elimnarScroll>.ui-layout-unit-content{
+                padding-bottom: 0px !important;
+                padding-top: 0px !important;
+                background-color: red !important;
+            }
+            .ui-stack{
+                padding-right: 30px !important;
+            }
+            .PanelUsuariosActuales >.ui-panel-titlebar , .PanelUsuariosActuales > .ui-panel-content{
+                padding-top: 0px !important;
+                padding-bottom: 0px !important;
+
+            }
+        </style>
+        <style>
+            .paddSscroll{
+                box-sizing: border-box;
+                color:
+                    #797979;
+                font-family: 'Lato', sans-serif;
+                font-size: 14px !important;
+                line-height: 1.428571429;
+            }
+            .chats{
+                padding-left: 0px;
+                margin-left: 0px;
+                list-style-type: none;
+                margin: 0px;
+                margin-left: 0px;
+                box-sizing: border-box;
+                color:
+                    #797979;
+                font-family: 'Lato', sans-serif;
+                font-size: 14px !important;
+                line-height: 1.428571429;
+
+            }
+            .chats li{
+                margin-bottom: 8px;
+                padding-bottom: 8px;
+                list-style: none;
+                box-sizing: border-box;
+                color:
+                    #797979;
+                font-family: 'Lato', sans-serif;
+                font-size: 14px !important;
+                line-height: 1.428571429;
+            }
+            .chats .by-me .chat-content{
+                margin-left: 60px;
+                position: relative;
+                background:
+                    #fff;
+                border: 1px solid
+                    #ddd;
+                padding: 7px 10px;
+                border-radius: 5px;
+                font-size: 13px;
+            }
+            .chats .by-other .chat-content{
+                margin-right: 60px;
+                position: relative;
+                background:
+                    #fff;
+                border: 1px solid
+                    #ddd;
+                padding: 7px 10px;
+                border-radius: 5px;
+                font-size: 13px;
+
+                box-sizing: border-box;
+            }
+            .chats .by-me .chat-content::before {
+                border-color: 
+                    rgba(238, 238, 238, 0);
+                border-right-color: rgba(238, 238, 238, 0);
+                border-right-color:
+                    #ccc;
+                border-width: 11px;
+                top: 30%;
+                margin-top: -11px;
+
+                right: 100%;
+                border: solid 
+                    transparent;
+                border-top-color: transparent;
+                border-top-width: medium;
+                border-right-color: transparent;
+                border-right-width: medium;
+                border-bottom-color: transparent;
+                border-bottom-width: medium;
+                border-left-color: transparent;
+                border-left-width: medium;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                box-sizing: border-box;
+            }
+            .chats .by-other .chat-content::before{
+                border-color:
+                    rgba(238, 238, 238, 0);
+                border-left-color: rgba(238, 238, 238, 0);
+                border-left-color:
+                    #ccc;
+                border-width: 11px;
+                top: 30%;
+                margin-top: -11px;
+
+                left: 100%;
+                border: solid
+                    transparent;
+                border-top-color: transparent;
+                border-top-width: medium;
+                border-right-color: transparent;
+                border-right-width: medium;
+                border-bottom-color: transparent;
+                border-bottom-width: medium;
+                border-left-color: transparent;
+                border-left-width: medium;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+
+                box-sizing: border-box;
+            }
+            .chats .by-me .chat-meta {
+                font-size: 11px;
+                color: 
+                    #999;
+                box-sizing: border-box;
+            }
+            .chats .by-other .chat-meta {
+                font-size: 11px;
+                color: 
+                    #999;
+                box-sizing: border-box;
+            }
+            .pull-right {
+                float: right !important;
+            }
+            .pull-left {
+                float: left !important;
+            }
+            .clearfix::before{
+                content: " ";
+                display: table;
+                box-sizing: border-box;
+            }
+            .clearfix::after{
+                clear: both;
+                content: " ";
+                display: table;
+                box-sizing: border-box;
+            }
+            .chats .by-me img{
+                margin-top: 5px;
+                margin-right: 10px;
+                padding: 1px;
+                background:
+                    #fff;
+                /*border: 1px solid
+                #ccc;*/
+                vertical-align: middle;
+                box-sizing: border-box;
+            }
+            .chats .by-other img{
+                margin-top: 5px;
+                margin-left: 10px;
+                padding: 1px;
+                background:
+                    #fff;
+                /*border: 1px solid
+                #ccc;*/
+                vertical-align: middle;
+                box-sizing: border-box;
+            }
+        </style>
+        <!--   -->  <style>
+            .fas{
+                width: 27px;
+                padding-left: 3px;
+                padding-bottom: 3px;
+            }
+            .far{
+                padding-right: 4px;
+                padding-bottom: 6px;
+            }
+        </style>
+        <style>
+            .ui-button-icon-only > .fas{
+
+                left: 13px;
+                margin-left: 0px;
+                padding-bottom: 5px;
+            }
+        </style>
+        <style>
+            a.logo {
+                font-size: 22px;
+                font-weight: 300;
+                color: 
+                    #fed189;
+                /* float: left;
+                 margin-top: 15px; */
+                text-transform: uppercase;
+
+                text-decoration: none;
+                outline: none;
+                outline: 0;
+
+                box-sizing: border-box;
+
+                font-family: 'Lato', sans-serif;
+
+                line-height: 1.428571429;
+
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+            .lite {
+                color: 
+                    #00a0df !important;
+            }
+        </style>
+            <style>
+                .caret {
+                   /* border-bottom-color:
+#A4AABA;
+border-top-color:
+#A4AABA; */
+                    
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid ;
+
+   /* border-top-color: rgb(0, 0, 0);*/
+border-right: 4px solid
+transparent;
+border-left: 4px solid
+    transparent;
+    border-bottom: 0 dotted;
+       /* border-bottom-color: currentcolor;*/
+    content: "";
+    
+    font-weight: bold;
+}
+            
+    
+</style>
+        <style>
+            .ui-dock-bottom span {
+                color: red;
+            }
+            .ui-stack .openStack li span {
+                width: 160px;
+            }
+        </style>
+        <!--   <f:event type="preRenderView" listener="" /> -->
+    </h:head>
+
+    <h:body>
+        #{beanPrincipal3.resetear()}
+         <p:importConstants id="id1" type="Util.EAc" var="EA" />
+       <!-- # {beanPrincipal3.resetear()} -->
+       <h:form  id="formMes"  >
+       <p:growl id="mensaj"/>
+       <!-- <p:outputLabel value="# {beanLogin3.getLeras()}" formEast2 />
+      <p:remoteCommand name="mostarMensaje"  actionListener="# {beanLogin3.mostrarMensaje()}" update=":formMes"  />
+       <p:remoteCommand name="moverRaton"  actionListener="# {beanLogin3.moverRaton()}"   /> -->
+     <p:remoteCommand name="actualizar" actionListener="#{beanPrincipal3.actualizarVisual()}" />
+     
+     <p:remoteCommand name="actualizarFormEast2" actionListener="#{beanPrincipal3.comprobarActualizar()}" update=":formEast2" />
+     
+     <p:remoteCommand name="actualizar2#{EA.DLG_CHAT_DERECHO}" update=":#{EA.FORM_CHAT_DERECHO}"  onsuccess="  setTimeout(function(){document.getElementById('idChatDerecho_content').scrollTo(0,document.getElementById('idChatDerecho_content').
+                      scrollHeight);},2000);"/>
+     <p:remoteCommand name="actualizar2#{EA.DLG_CHAT_CENTRO}"    update=":#{EA.FORM_CHAT_CENTRO}"  onsuccess="  setTimeout(function(){document.getElementById('idChatCentro_content').scrollTo(0,document.getElementById('idChatCentro_content').
+                      scrollHeight);},2000);"
+/> 
+      <p:remoteCommand name="actualizar2#{EA.DLG_CHAT_ISQUIERDO}"    update=":#{EA.FORM_CHAT_ISQUIERDO}" onsuccess="  setTimeout(function(){document.getElementById('idChatIsquierdo_content').scrollTo(0,document.getElementById('idChatIsquierdo_content').
+                      scrollHeight);},2000);"
+/> 
+     <p:remoteCommand name="actualizar#{EA.DLG_CHAT_DERECHO}" action="#{beanPrincipal3.scrollToEndDerecho2()}" actionListener="#{beanPrincipal3.scrollToEndDerecho()}" update=":#{EA.FORM_CHAT_DERECHO}" oncomplete="document.getElementById('idChatDerecho_content').scrollTo(0,document.getElementById('idChatDerecho_content').
+                      scrollHeight);" onsuccess="  setTimeout(function(){document.getElementById('idChatDerecho_content').scrollTo(0,document.getElementById('idChatDerecho_content').
+                      scrollHeight);},2000);"  /> <!-- update=":# {EA.FORM_CHAT_DERECHO}"  -->
+     <p:remoteCommand name="actualizar#{EA.DLG_CHAT_CENTRO}"   actionListener="#{beanPrincipal3.scrollToEndCentro()}" update=":#{EA.FORM_CHAT_CENTRO}" oncomplete="document.getElementById('idChatCentro_content').scrollTo(0,document.getElementById('idChatCentro_content').
+scrollHeight);"
+  onsuccess="  setTimeout(function(){document.getElementById('idChatCentro_content').scrollTo(0,document.getElementById('idChatCentro_content').
+                      scrollHeight);},2000);"
+/> <!--  -->
+     <p:remoteCommand name="actualizar#{EA.DLG_CHAT_ISQUIERDO}"   actionListener="#{beanPrincipal3.scrollToEndIsquierdo()}" update=":#{EA.FORM_CHAT_ISQUIERDO}" oncomplete="document.getElementById('idChatIsquierdo_content').scrollTo(0,document.getElementById('idChatIsquierdo_content').
+scrollHeight);"
+  onsuccess="  setTimeout(function(){document.getElementById('idChatIsquierdo_content').scrollTo(0,document.getElementById('idChatIsquierdo_content').
+                      scrollHeight);},2000);"
+/> <!--  -->
+  </h:form>
+       
+       
+       
+        <p:layout id="id2" fullPage="true"  >
+<p:layoutUnit  position="center"  >
+    <div ><!-- onmousemove="actualizar();" -->
+                <ui:insert name="content">Content</ui:insert>
+</div>
+            </p:layoutUnit>
+            <p:layoutUnit id="id3" position="south" size="100" header="Opcional" resizable="true"  collapsible="true">
+                <div ><!-- onmousemove="actualizar();" -->
+                <h:form>
+                    <p:dock position="bottom">
+                        <p:menuitem action="#{beanPrincipal3.irAInicio()}" value="Inicio" icon="/resources/demo/images/dock/home.png" />
+                        <p:menuitem  action="#{beanPrincipal3.apretoCrearPublicacion()}" value="Crear" icon="/resources/img/menus/Crear Publicacion3.ico" />
+                         <p:menuitem action="#{beanPrincipal3.apretoVerUltimasPublicaciones()}" value="Ultimas" icon="/resources/img/menus/Ultimas Publicaciones2.ico" />
+
+                    </p:dock>
+                </h:form>
+                 <ui:insert name="sur"></ui:insert>
+                 </div>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="230" header="Menu Principal" resizable="true"  collapsible="true" effect="fade">
+                <div > <!-- onmousemove="actualizar();" -->
+                <h:form id="formMenu">
+
+                    <p:growl />
+                    <!--  --> <p:panelMenu id="menuPrincipal" model="#{beanPrincipal3.model}"/>
+
+
+
+                    <!--<p:panelMenu  id="menuPrincipal" style="width:300px">
+                        <p:submenu label="General" expanded="true" >
+                            <p:menuitem value="Inicio" url="faces/Inicio.xhtml"  icon="ui-icon-disk" />
+                            <p:menuitem value="Crear" url="faces/CrearPublicacion.xhtml"  icon="ui-icon-disk" />
+                            <p:menuitem value="Ver" url="faces/TodasLasPublicaciones.xhtml"  icon="ui-icon-disk" />
+                        </p:submenu>
+                        <p:submenu label="Tecnologia"  >
+                            <p:menuitem value="Robotica" actionListener="# {beanPrincipal3.apretoMenuPrincipal}" icon="ui-icon-disk" />
+                            <p:menuitem value="Update" actionListener="# {beanPrincipal3.update}"  icon="ui-icon-arrowrefresh-1-w" />
+                        </p:submenu>
+                        <p:submenu label="Non-Ajax Menuitem">
+                            <p:menuitem value="Delete" actionListener="# {beanPrincipal3.delete}"  ajax="false" icon="ui-icon-close"/>
+                        </p:submenu>
+                        <p:separator />
+                        <p:submenu label="Navigations" >
+                            <p:submenu label="Links" icon="ui-icon-extlink">
+                                <p:submenu label="PrimeFaces" icon="ui-icon-heart">
+                                    <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home" />
+                                    <p:menuitem value="Docs" url="http://www.primefaces.org/documentation" icon="ui-icon-document" />
+                                    <p:menuitem value="Download" url="http://www.primefaces.org/downloads" icon="ui-icon-arrowthick-1-s" />
+                                    <p:menuitem value="Support" url="http://www.primefaces.org/support" icon="ui-icon-wrench" />
+                                </p:submenu>
+                            </p:submenu>
+                            <p:menuitem value="Mobile"  icon="ui-icon-signal" />
+                        </p:submenu>
+                    </p:panelMenu>  -->
+
+                </h:form>
+</div>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="east" size="200" header="Contactos" resizable="true"  collapsible="true" effect="drop">
+                <div ><!-- onmousemove="actualizar();" -->
+                <h:form id="formEast" style="margin-right: 20px; ">
+                    <p:growl id="mensajesEast" />
+                    <p:remoteCommand name="ponerTema"  actionListener="#{beanTema3.ponerTema()}"   />
+                    <p:themeSwitcher onchange="ponerTema();" value="#{beanTema3.tema}"  id="basic2" style="width: 85%; margin-bottom: 10px;" effect="fade" valueChangeListener="#{beanTema3.ponerTema}" >
+                        <!-- <f:selectItem itemLabel="Choose Theme" itemValue="" noSelectionOption="true"  /> -->
+                        <f:selectItems value="#{themeSwitcherView.themes}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme.name}" actionListener="#{beanTema3.ponerTema}"/>
+
+
+                    </p:themeSwitcher>  
+                    <!-- onclick="PF('stackDerecho').expanded=false;" -->
+                    <p:stack widgetVar="stackDerecho" icon="/resources/demo/images/dock/stack.png" expanded="false"  >
+                        <p:menuitem  action="#{beanPrincipal3.apretoEditarPrefil()}" value="Editar Prefil" icon="/resources/img/menus/Editar Prefil8.ico" />
+                        <p:menuitem action="#{beanPrincipal3.editarPrefil()}" value="Modificar Foto" icon="/resources/img/menus/Editar Foto Prefil.png" />
+                        <p:menuitem action="#{beanPrincipal3.apretoCambiarCuenta('/PortalDeNoticiasServidor2/j_spring_security_logout')}" value="Cambiar Cuenta" icon="/resources/img/menus/Cambiar Cuenta.ico" />
+                        <p:menuitem action="#{beanPrincipal3.apretoVerSeguidosPublicaciones()}" value="Seguidos" icon="/resources/img/menus/publicaciones de Seguidores9.ico"/>
+                        <p:menuitem action="#{beanPrincipal3.apretoVerMisPublicaciones()}" value="Mis Publicaciones" icon="/resources/img/menus/Mis Publicaciones8.ico" />
+                    </p:stack>
+                    <!-- usuariosActuales toggleable3  formEast-->
+                    <p:inputText id="filtroTexto" placeholder="Filtrar" style="width: 93%; margin-bottom: 5px;" value="#{beanPrincipal3.filtroDeUsuariosActuales}">
+                        <p:ajax event="keyup" update="formEast2" listener="#{beanPrincipal3.filtrarUsuariosActuales}" />
+                    </p:inputText>
+                     </h:form>
+                    <h:form id="formEast2" style="margin-right: 20px; " ><!-- value="# {beanPrincipal3.usuariosActuales}" value="# {beanPrincipal3.getUsuariosActuales()}"-->
+                    <p:repeat   id="usuariosActuales" value="#{beanPrincipal3.getUsuariosActuales2()}" var="user"  >
+                        
+                        <!--    -->                                             
+                        <p:remoteCommand name="#{beanPrincipal3.getFuntionChat(user)}"  actionListener="#{beanPrincipal3.abrirChat(user)}"  update="#{beanPrincipal3.getUpdatesChat()} :formEast2"  />
+                        <div onclick="#{beanPrincipal3.getFuntionChat(user)}();">
+                            <p:panel   class="PanelUsuariosActuales" id="toggleable3"    toggleSpeed="500" closeSpeed="500" widgetVar="panel3" style="margin-bottom:2px">
+                                <f:facet    name="header"  >
+                                    <p:graphicImage  style="border-radius: 10px;width: 20px;height: 20px;" url="#{beanPrincipal3.getDireccionDeImagen(user)}" /> 
+                                    <span style="font-size: xx-small;">#{user.cuenta}</span>
+                                </f:facet>
+<!--                                <p:ajax event="close" listener="# {beanPrincipal3.save()}" update=":formEast:mensajesEast" />
+                                <p:ajax event="toggle" listener="# {beanPrincipal3.save()}" update=":formEast:mensajesEast" />-->
+                                <i style="#{beanPrincipal3.OcultarSiNoEstaSubscrito(user)}}" class="far fa-star"/>  <p:outputLabel style="font-size: small;" value="#{beanPrincipal3.mensajeDeNoVisto(user)}"/>
+
+                            </p:panel>
+
+                        </div>
+                        <!-- -->  
+                        <p:contextMenu id="menuDerechoUsers" for="toggleable3">
+                            <p:menuitem value="Chat" icon="fas fa-comments" onclick="#{beanPrincipal3.getFuntionChat(user)}();"/>
+                            <p:menuitem id="MISubcribirse" update=" :formEast2" style="#{beanPrincipal3.OcultarSiEstaSubscrito(user)}" value="Subcribirse" actionListener="#{beanPrincipal3.addSubcripcion(user)}" icon="fas fa-user-plus" >
+                                <p:confirm  header="Confirmacion" message="Estas Seguro de Subscribirte?" icon="ui-icon-alert" />
+                            </p:menuitem>
+                            <p:menuitem id="MIDesubcribirse" update=" :formEast2" style="#{beanPrincipal3.OcultarSiNoEstaSubscrito(user)}" value="Desubcribirse" actionListener="#{beanPrincipal3.eliminarSubcripcion(user)}" icon="fas fa-user-times" >
+                                <p:confirm header="Confirmacion" message="Estas Seguro de Desubscribirte?" icon="ui-icon-alert" />
+                            </p:menuitem>
+                            <p:menuitem value="Ver Publicaciones" actionListener="#{beanPrincipal3.verSusPublicaciones(user)}" icon="#{EA.ICON_VER_SUS_PUBLICACIONES}" />
+                        </p:contextMenu>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                        
+                    </p:repeat>
+               </h:form>
+</div>
+            </p:layoutUnit>
+
+            
+
+            <p:layoutUnit class="elimnarScroll" position="north"   resizable="true"  collapsible="true" >
+                <!--header="Top" size="100" size="60"-->
+                <div ><!-- onmousemove="actualizar();" -->
+                <h:form id="formTop">     
+                    <p:growl id="messages" showDetail="true" />
+
+                    <p:toolbar id="tolbarPrincipal"  >
+                        <f:facet name="left">
+
+                            <p:commandButton class="iconoTopCrear" value="Crear" icon="fas fa-edit" action="#{beanPrincipal3.apretoCrearPublicacion()}" />
+                           
+                            <!--
+                                                        <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+                            -->
+                            <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                            </span>
+                            <!--
+                                                        <p:commandButton  type="button" title="Save" icon="ui-icon-disk" />
+                                                        <p:commandButton action="# {beanPrincipal3.ponerTema()}"  title="Delete" icon="ui-icon-trash" update=":formEast:basic2"/>
+                                                        <p:commandButton type="button" title="Print" icon="ui-icon-print" />
+                            -->
+                            <a href="Inicio.faces" class="logo">PORTAL DE <span class="lite">NOTICIAS</span></a>
+
+                            <p:autoComplete placeholder="Buscar Usuario" style="margin-right:10px" id="acSimple" value="#{beanPrincipal3.cuentaSuperiorSeleccionada}" completeMethod="#{beanPrincipal3.completeText}"
+                                            var="autUser" itemLabel="#{autUser.cuenta}" itemValue="#{autUser.cuenta}"
+                                            >
+                                <p:column style="width: 20%;">
+                                    <p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;" url="#{beanPrincipal3.getDireccionDeImagen(autUser)}" />
+                                </p:column>
+
+                                <p:column>
+                                    <h:outputText value="#{autUser.cuenta}" />
+                                </p:column>
+                            </p:autoComplete>
+                            <p:commandButton  title="Print" icon="ui-icon-search" actionListener="#{beanPrincipal3.apretoBuscarSuperior()}" />
+                            
+<!--                             <a href="Inicio.faces" class="logo">SERVIDOR</a>-->
+                            <!--   <p:inputText style="margin-right:10px" placeholder="Search"/> -->
+                        </f:facet>
+
+                        <f:facet name="right">
+
+ <!-- <p:themeSwitcher value="# {beanPrincipal3.tema}"   style="width: 85%; margin-bottom: 10px;" effect="fade"  >
+                        <f:selectItems value="# {themeSwitcherView.themes}" var="theme" itemLabel="# {theme.displayName}" itemValue="# {theme.name}" />
+
+
+                    </p:themeSwitcher>  -->
+                            <!-- value="Options" <f:facet  name="header" > </f:facet> </b>-->
+                            <p:remoteCommand name="rc2"  actionListener="#{beanPrincipal3.prueba()}" />
+                            <!-- <p:panel id="divTopImg">  </p:panel> -->
+                            <style>
+                                /*.TopUsuario:hover{
+                                    
+                                    border: 1px solid
+#000000;
+background:
+#1c1c1c url("/PruebaProyecto2/faces/javax.faces.resource/images/ui-bg_glass_55_1c1c1c_1x400.png?ln=primefaces-black-tie") 50% 50% repeat-x;
+font-weight: normal;
+color:
+#ffffff;     
+                                }*/
+                            </style>
+                            <div onmouseout="document.getElementById('topUsuario').classList.remove('ui-state-hover');"
+                                    onmouseover="document.getElementById('topUsuario').classList.toggle('ui-state-hover');"
+                                     id="topUsuario" onclick="PF('menuTop').show();" 
+                                     class="TopUsuario ui-button ui-widget ui-state-default ui-corner-all" 
+                                 style="height: 30px;padding-left: 5px;padding-top: 2px;">
+                                
+                                <p:graphicImage  id="imagenUsuarioActualTop" style="border-radius: 10px; cursor: pointer; width: 20px;height: 20px;" url="#{beanPrincipal3.prefilActual.getDireccionRelativaImagen()}" />
+
+                                <p:outputLabel style="cursor: pointer; margin-left: 10px; margin-right: 10px;" id="labelTopUsuario" value="#{beanPrincipal3.prefilActual.usuarioActual.username}" />
+                            
+                                <p:outputLabel style="cursor: pointer; margin-right: 10px;margin-bottom: 2px;" id="labelTopUsuario2" class="caret ui-outputlabel ui-widget"/>
+                            </div>
+                            <script>
+                              /*   $("topUsuario").hover().addClass("ui-state-hover"); 
+                             $("topUsuario").mouseout().removeClass("ui-state-hover"); right
+     */
+                            </script>
+                       
+                            
+                                   
+                            <p:menu style=""  widgetVar="menuTop" overlay="true" trigger="imagenUsuarioActualTop labelTopUsuario labelTopUsuario2" my="left top" at="left bottom">
+                               <p:menuitem value="Agregar Usuario" actionListener="#{beanPrincipal3.mostrarDialogoAgregarUsuario()}" update="messages" icon="fas fa-user-plus" />
+                                <p:menuitem value="Editar Prefil" actionListener="#{beanPrincipal3.apretoEditarPrefil()}" update="messages" icon="fas fa-address-card" />
+                                <p:menuitem value="Modificar Foto" actionListener="#{beanPrincipal3.editarPrefil()}" update=":editarFotoPrefil messages" icon="fas fa-address-book" />
+                                <p:menuitem value="Cambiar Cuenta" actionListener="#{beanPrincipal3.apretoCambiarCuenta('/PortalDeNoticiasServidor2/j_spring_security_logout')}"   update="messages" icon="fas fa-retweet" />
+                                <p:menuitem style="#{beanPrincipal3.ocultarSiNoEsAdministrador()}}" value="Gestionar Usuarios" actionListener="#{beanPrincipal3.apretoGestionarUsuarios()}" update="messages" icon="fas fa-users" />
+                                <p:menuitem class="MITopGestionarUsuario" style="#{beanPrincipal3.ocultarSiNoEsAdministrador()}} font-size: medium;" value="Gestionar Servidores" actionListener="#{beanPrincipal3.apretoGestionarServidores()}" update="messages" icon="fas fa-laptop" />	
+                                
+                            </p:menu>
+                            <!-- /PortalDeNoticiasServidor2/j_spring_security_logout
+                            actionListener="# {beanPrincipal3.apretoCambiarCuenta('$ {facesContext.externalContext.requestContextPath}/j_spring_security_logout')}"-->
+<!--                            <script>
+                                alert("$ {facesContext.externalContext.requestContextPath}/j_spring_security_logout")
+                            </script>-->
+                            
+                            
+<!--                            $ {facesContext.externalContext.requestContextPath}/j_spring_security_logout-->
+                            <!--       <style>  fas fa-sitemap
+                                    .iconoUsearioActual{
+                                        background-image: url("# {beanPrincipal3.prefilActual.getDireccionRelativaImagen()}");
+                                      /*  border-radius: 10px; 
+                                        cursor: pointer;
+                                        width: 20px;
+                                        height: 20px; */
+                                    }
+                                </style>
+                                <p:commandButton icon="iconoUsearioActual" value="# {beanPrincipal3.prefilActual.usuarioActual.username}" />
+                                <p:menuButton value="# {beanPrincipal3.prefilActual.usuarioActual.username}"  iconPos="left" icon="iconoUsearioActual">
+
+                                <p:menuitem value="Agregar Usuario" actionListener="# {beanPrincipal3.mostrarDialogoAgregarUsuario()}" update="messages" icon="ui-icon-disk" />
+                                <p:menuitem value="Editar Prefil" actionListener="# {beanPrincipal3.apretoEditarPrefil()}" update="messages" icon="ui-icon-disk" />
+                                <p:menuitem value="Modificar Foto" actionListener="# {beanPrincipal3.editarPrefil()}" update=":editarFotoPrefil messages" icon="ui-icon-disk" />
+                                <p:menuitem value="Cambiar Cuenta" actionListener="# {beanPrincipal3.apretoCambiarCuenta()}" update="messages" icon="ui-icon-disk" />
+                                <p:menuitem value="Save" actionListener="# {beanPrincipal3.save}" update="messages" icon="ui-icon-disk" />
+                                <p:menuitem value="Update"  actionListener="# {beanPrincipal3.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+                                <p:menuitem value="Delete" actionListener="# {beanPrincipal3.delete}" ajax="false" icon="ui-icon-close" />
+                                <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink" />
+
+                            </p:menuButton>
+                          --> 
+                        </f:facet>
+
+                    </p:toolbar>
+                    <p:sticky target="tolbarPrincipal" />
+                </h:form>
+</div>
+            </p:layoutUnit>
+
+        </p:layout>
+
+        <!--   
+         <div id="content" class="left_content">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+        <div id="top">
+                <ui:insert name="top">Top</ui:insert>
+            </div>
+            <div>
+                <div id="left">
+                    <ui:insert name="left">Left</ui:insert>
+                </div>
+               
+            </div>
+            <div id="bottom">
+                <ui:insert name="bottom">Bottom</ui:insert>
+            </div>
+        beanAplicacion
+        -->
+        <style>
+            .dialogoTop{
+
+                top: 50px !important;  
+            }
+            .dialogoTop2{
+
+                top: 10px !important;  
+            }
+            .botonSiNo .ui-state-active,.botonSiNo .ui-inputswitch-off{
+                padding-top: 0px;
+            }
+            /*.cropper-container img {
+               max-width: 100% !important;  
+               max-height: 100% !important;  
+           }
+           .contenidoDeDialogo{
+                max-width: 100% !important;  
+               max-height: 100% !important;  
+           }*/
+        </style>
+        <div > <!-- onmousemove="actualizar();" -->
+        <h:form id="editarFotoPrefil" enctype="multipart/form-data">
+            <p:growl  id="msjEditarFoto" />
+            <p:dialog  class="dialogoTop" header="Editar Prefil" widgetVar="#{EA.DLG_EDITAR_PREFIL}" modal="true" style="max-width: 700px; max-height: 500px; ">
+
+                #{beanDialogoEditarPrefil3.resetear()}<!-- /(\.|\/)(gif|jpe?g|png)$/ -->
+                <h:panelGrid columns="3" >
+                    <p:outputLabel value="Foto para el prefil:"/>
+                    <p:fileUpload  mode="simple" value="#{beanDialogoEditarPrefil3.file}" 
+                                    dragDropSupport="true"/>
+                    <p:commandButton value="Modificar Foto" actionListener="#{beanDialogoEditarPrefil3.apretoModificarFoto()}" ajax="false" update=":editarFotoPrefil" />
+
+                </h:panelGrid>
+                <!-- style="margin-bottom: 10px;"  <p:outputLabel value="# {beanDialogoEditarPrefil3.nombreModificada}"/> height="100" -->
+                <div style="width: 100%;  #{beanDialogoEditarPrefil3.ocultarImagenRecortadaSiNoExiste()}">
+                    <center >Imagen modificada:</center>
+                    <center><p:graphicImage style="max-width: 40%;max-height: 40%;" url="#{beanDialogoEditarPrefil3.getDireccionImagenRecortada()}" /></center>
+                </div>
+
+                <f:facet name="footer">
+                    <div style="text-align: right;">
+                        <p:commandButton value="Cancelar" actionListener="#{beanDialogoEditarPrefil3.apretoCancelar()}"     icon="ui-icon-close"/>
+                        <p:commandButton  value="Aceptar"  actionListener="#{beanDialogoEditarPrefil3.apretoAceptar()}"  ajax="false" update=":formTop :formTop:imagenUsuarioActualTop" icon="ui-icon-check"/>
+
+
+                    </div>
+                </f:facet>
+                <!-- <h:panelGrid columns="2" >
+                     <p:fileUpload  mode="simple" value="# {beanDialogoEditarPrefil3.file}"/>
+                     <p:commandButton value="Modificar Foto" actionListener="# {beanDialogoEditarPrefil3.utilizarFile()}" ajax="false" />
+                     <f:facet name="footer">
+                         <p:commandButton value="Aceptar" update=":formTop:messages" actionListener="# {beanDialogoEditarPrefil3.aceptarEditarPrefil()}"
+                                          />
+                     </f:facet>
+                 </h:panelGrid> -->
+
+            </p:dialog>  
+        </h:form> 
+</div>
+        <div > <!-- onmousemove="actualizar();" -->
+        <h:form id="formEditarFotoPrefil">
+            <!--      
+            <p:remoteCommand name="mostrarDLGEditarFotoPrefil1"  actionListener="# {beanDialogoEditarFotoPrefil3.onShowPrimero}" />
+            <p:remoteCommand name="ocultarDLGEditarFotoPrefil1"  actionListener="# {beanDialogoEditarFotoPrefil3.onHidePrimero}" />
+             onShow="mostrarDLGEditarFotoPrefil1();" onHide="ocultarDLGEditarFotoPrefil1();" 
+            -->
+            <p:dialog header="Editar Foto" widgetVar="#{EA.DLG_EDITAR_FOTO_PREFIL}" modal="true" class="dialogoTop" style="max-width: 80% !important;max-height: 80% !important;" >
+
+                <!--  <h:panelGroup id="cropped">
+                         <p:graphicImage  url="/# {beanDialogoEditarFotoPrefil3.direccionRelativaNewImagen}" />
+                     </h:panelGroup>  maxSize="500"  -->
+                <p:panelGrid columns="1"   style="max-width: 70% !important;max-height: 70% !important;"  >
+                    <p:imageCropper id="crooper"   value="#{beanDialogoEditarFotoPrefil3.croppedImage}" image="#{beanDialogoEditarFotoPrefil3.direccionRelativaImagenACortar}" initialCoords="225,75,300,125"/>          
+                </p:panelGrid>
+
+
+
+                <f:facet name="footer" >
+
+                    <div  style="text-align: right;">
+                        <p:commandButton value="Cancelar" update=":editarFotoPrefil :forAdd :formTop:messages" actionListener="#{beanDialogoEditarFotoPrefil3.cancelarRecortarImagen()}"
+                                         /> 
+                        <p:commandButton value="Recortar" ajax="false" action="#{beanDialogoEditarFotoPrefil3.crop}" update=":editarFotoPrefil :forAdd :formTop:messages" icon="ui-icon-scissors"/>
+                        <!--     <p:commandButton value="Aceptar" update=":editarFotoPrefil :forAdd :formTop:messages" actionListener="# {beanDialogoEditarFotoPrefil3.aceptarRecortarImagenPrefil()}"
+                                            />
+                        <center></center> -->
+                    </div>
+
+                </f:facet>
+
+            </p:dialog> 
+        </h:form>
+</div>
+
+        <!--<h:form id="formEditarFotoPrefil2"> maxSize="500"   
+            <p:remoteCommand name="mostrarDLGEditarFotoPrefil2"  actionListener="# {beanDialogoEditarFotoPrefil3.onShowSegundo}" />
+            <p:remoteCommand name="ocultarDLGEditarFotoPrefil2"  actionListener="# {beanDialogoEditarFotoPrefil3.onHideSegundo}" />
+          <p:dialog onShow="mostrarDLGEditarFotoPrefil2();" onHide="ocultarDLGEditarFotoPrefil2();"  header="Editar Foto 2" widgetVar="# {EA.DLG_EDITAR_FOTO_PREFIL2}" modal="true" class="dialogoTop" style="max-width: 80% !important;max-height: 80% !important;" >
+            <p:panelGrid columns="1"   style="max-width: 70% !important;max-height: 70% !important;"  >
+                <p:imageCropper  id="crooper2"   value="# {beanDialogoEditarFotoPrefil3.croppedImageSegundo}" image="# {beanDialogoEditarFotoPrefil3.direccionRelativaImagenACortar}" initialCoords="225,75,300,125"/>          
+             </p:panelGrid>
+
+             <center> <p:commandButton value="Recortar" action="# {beanDialogoEditarFotoPrefil3.crop}" update=" :formEditarFotoPrefil  :formTop:messages" icon="ui-icon-scissors"/></center>
+            
+             <f:facet name="footer" >
+                
+                 <div  style="text-align: right;">
+                     <p:commandButton value="Cancelar" update=":editarFotoPrefil  :formTop:messages" actionListener="# {beanDialogoEditarFotoPrefil3.cancelarRecortarImagen()}"
+                                      />
+                     <p:commandButton value="Aceptar" update=":editarFotoPrefil  :formTop:messages" actionListener="# {beanDialogoEditarFotoPrefil3.aceptarRecortarImagenPrefil()}"
+                                      /></div>
+
+             </f:facet>
+             
+         </p:dialog> 
+      </h:form>
+        --> 
+        <!-- <p:row>
+                                <p:column></p:column>
+                                <p:column></p:column>
+                                <p:column></p:column>
+                                <p:column></p:column>
+                                </p:row> -->
+        <div ><!-- onmousemove="actualizar();" -->
+        <h:form id="forAdd" >
+            <p:growl id="msgAdd"/>
+            <!--  --> #{beanDialgoAgregarUsuario3.resetearUsuario()}
+            <p:dialog header="Agregar Usuario" widgetVar="#{EA.DLG_AGREGAR_USUARIO}" width="900"
+                      showEffect="bounce" draggable="false" resizable="false"
+                      modal="true" closable="false">
+                <h:panelGrid  cellpadding="10" cellspacing="5" columns="4">
+                    <h:outputText value="Usuario"/>
+                    <p:inputText  style="width: 100%" value="#{beanDialgoAgregarUsuario3.usuario.username}" autocomplete="true"/>
+                    <h:outputText value="Identificaci&oacute;n"/>
+                    <p:inputText  style="width: 100%" value="#{beanDialgoAgregarUsuario3.usuario.identificacion}" autocomplete="true"/>
+
+                    <h:outputText value="Nombre"/>
+                    <p:inputText   style="width: 100%" value="#{beanDialgoAgregarUsuario3.usuario.nombre}" autocomplete="true"/>
+                    <h:outputText value="Email"/>
+                    <p:inputText  type="mail" style="width: 100%" value="#{beanDialgoAgregarUsuario3.usuario.email}" autocomplete="true"/>
+
+
+                    <h:outputText value="Primer Apellido"/>
+                    <p:inputText  style="width: 100%" value="#{beanDialgoAgregarUsuario3.usuario.apellido1}" autocomplete="true"/>
+                    <h:outputText value="Segundo apellido"/>
+                    <p:inputText  style="width: 100%" value="#{beanDialgoAgregarUsuario3.usuario.apellido2}" autocomplete="true"/>
+
+                    <h:outputText value="Contrase&ntilde;a"/>
+                    <p:inputText  type="password" style="width: 100%" value="#{beanDialgoAgregarUsuario3.usuario.password}" autocomplete="true"/>
+                    <h:outputText value="Repetir contrase&ntilde;a"/>
+                    <p:inputText  type="password" style="width: 100%" value="#{beanDialgoAgregarUsuario3.reafirmarContra}" autocomplete="true"/>
+
+                    <h:outputText style="#{beanDialgoAgregarUsuario3.ocultarSiNoEsAdministrador()}" value="Habilitado"/>
+                    <p:selectBooleanCheckbox style="#{beanDialgoAgregarUsuario3.ocultarSiNoEsAdministrador()} text-align: center;" class="center_content" value="#{beanDialgoAgregarUsuario3.usuario.enabled}"/>
+                    <h:outputText style="#{beanDialgoAgregarUsuario3.ocultarSiNoEsAdministrador()}" value="Administrador"/>
+                    <p:selectOneMenu  style="#{beanDialgoAgregarUsuario3.ocultarSiNoEsAdministrador()} width: 100%" value="#{beanDialgoAgregarUsuario3.rol}" effect="fold" >
+                        <f:selectItems value="#{beanDialgoAgregarUsuario3.roles}" />
+                    </p:selectOneMenu>
+
+
+                </h:panelGrid>
+
+
+                <div style="margin-bottom: 20px;" ><center> <h:outputText  value="Descripci&oacute;n"/> <br/></center></div> 
+
+                <p:inputTextarea  style="width: 95%" value="#{beanDialgoAgregarUsuario3.usuario.description}"/>
+
+                <f:facet name="footer">
+                    <div style="text-align: right;">
+                        <!-- <p:commandButton  value="Agregar"  actionListener="# {beanDialgoAgregarUsuario3.apretoAceptar()}" update=":formTop:tolbarPrincipal" icon="ui-icon-check"/> -->
+                        <p:commandButton  value="Agregar"  actionListener="#{beanDialgoAgregarUsuario3.apretoAceptar()}" update="#{beanDialgoAgregarUsuario3.getUpdateAceptar()}" icon="ui-icon-check"/>
+                        <p:commandButton type="buttom" value="Cancelar" actionListener="#{beanDialgoAgregarUsuario3.apretoCancelar()}"   update="forAdd" icon="ui-icon-close"/>
+
+                    </div>
+                </f:facet>
+
+
+
+
+            </p:dialog>
+
+        </h:form> 
+</div>
+        <div ><!-- onmousemove="actualizar();" -->
+        <h:form id="formEdit" >
+            <!--  disabled="true" style="width: 100%" autocomplete="true" -->
+            <p:remoteCommand name="resetear"  actionListener="#{beanDialogoEditarUsuario3.resetearUsuario()}" />
+            <p:growl id="msgEdit"/>
+            <!-- onShow="resetear();"  --> #{beanDialogoEditarUsuario3.resetearUsuario()}
+            <p:dialog   class="dialogoTop2" header="Editar Usuario" widgetVar="#{EA.DLG_EDITAR_USUARIO}" width="900"
+                      showEffect="bounce" draggable="false" resizable="false"
+                      modal="true" closable="false">
+                
+                <h:panelGrid  cellpadding="10" cellspacing="5" columns="4">
+                    <h:outputText value="Usuario"/>
+                    <p:outputLabel value="#{beanDialogoEditarUsuario3.usuario.username}" />
+                    <h:outputText value="Identificaci&oacute;n"/>
+                    <p:inputText  style="width: 100%" value="#{beanDialogoEditarUsuario3.usuario.identificacion}" autocomplete="true"/>
+
+                    <h:outputText value="Nombre"/>
+                    <p:inputText   style="width: 100%" value="#{beanDialogoEditarUsuario3.usuario.nombre}" autocomplete="true"/>
+                    <h:outputText value="Email"/>
+                    <p:inputText  type="mail" style="width: 100%" value="#{beanDialogoEditarUsuario3.usuario.email}" autocomplete="true"/>
+
+
+                    <h:outputText value="Primer Apellido"/>
+                    <p:inputText  style="width: 100%" value="#{beanDialogoEditarUsuario3.usuario.apellido1}" autocomplete="true"/>
+                    <h:outputText value="Segundo apellido"/>
+                    <p:inputText  style="width: 100%" value="#{beanDialogoEditarUsuario3.usuario.apellido2}" autocomplete="true"/>
+
+
+                     <h:outputText style="#{beanDialogoEditarUsuario3.ocultarSiNoEsAdministrador()}" value="Habilitado"/>
+                       <p:selectBooleanCheckbox style="#{beanDialogoEditarUsuario3.ocultarSiNoEsAdministrador()} text-align: center;" class="center_content" value="#{beanDialogoEditarUsuario3.usuario.enabled}"/>
+                       <h:outputText style="#{beanDialogoEditarUsuario3.ocultarSiNoEsAdministrador()}" value="Administrador"/>
+                       <p:selectOneMenu  style="#{beanDialogoEditarUsuario3.ocultarSiNoEsAdministrador()} width: 100%" value="#{beanDialogoEditarUsuario3.rol}" effect="fold" >
+                           <f:selectItems value="#{beanDialogoEditarUsuario3.roles}" />
+                       </p:selectOneMenu> 
+
+
+                </h:panelGrid>
+              <!--  <center> <p:outputLabel value="Cambiar Contraseña:  " />
+                    <p:inputSwitch widgetVar="btsn" id="botonSiNoEditarContra" class="botonSiNo" style="top: 6px !important;" onLabel="Si" offLabel="No" value="# {beanDialogoEditarUsuario3.modificarContraseña}">
+                        <p:ajax  update="panelModificarContra" />
+                    </p:inputSwitch></center> -->
+                
+                <center>   <p:selectBooleanButton   value="#{beanDialogoEditarUsuario3.modificarContraseña}"  onLabel="Modificar Contraseña" offLabel="No Modificar Contraseña"  >
+                                         <p:ajax  update="panelModificarContra" />
+                                        </p:selectBooleanButton>
+                </center>
+                <script>
+                   // document.getElementById('formEdit:botonSiNoEditarContra').jQuery341000265690330310219821.events.click.shift();
+                  // PF('btsn').jq.on("click.inputSwitch",function(b){PF('btsn').toggle();PF('btsn').input.trigger("focus");b.preventDefault()});
+                    </script>
+                <!-- listener="" -->
+                <center>   <h:panelGrid id="panelModificarContra"  style="#{beanDialogoEditarUsuario3.ocultarSiNoModificarContraseña()}" cellpadding="10" cellspacing="5" columns="2">
+                        <h:outputText value="Contrase&ntilde;a Anterior"/>
+                        <p:inputText  type="password" style="width: 100%" value="#{beanDialogoEditarUsuario3.contraseñaAnterior}" autocomplete="true"/>
+
+                        <h:outputText value="Contrase&ntilde;a Nueva"/>
+                        <p:inputText  type="password" style="width: 100%" value="#{beanDialogoEditarUsuario3.usuario.password}" autocomplete="true"/>
+                        <h:outputText value="Repetir contrase&ntilde;a"/>
+                        <p:inputText  type="password" style="width: 100%" value="#{beanDialogoEditarUsuario3.reafirmarContra}" autocomplete="true"/>
+
+                    </h:panelGrid>
+                </center>
+                <div style="margin-bottom: 20px;" ><center> <h:outputText  value="Descripci&oacute;n"/> <br/></center></div> 
+
+                <p:inputTextarea  style="width: 95%" value="#{beanDialogoEditarUsuario3.usuario.description}"/>
+
+                <f:facet name="footer">
+                    <div style="text-align: right;">
+                         <!-- <p:commandButton  value="Editar"  actionListener="# {beanDialogoEditarUsuario3.apretoAceptar()}" update=":formTop:tolbarPrincipal" icon="ui-icon-check"/> -->
+                        <p:commandButton  value="Editar"  action="#{beanDialogoEditarUsuario3.apretoAceptar()}" update="#{beanDialogoEditarUsuario3.getUpdateDLGAceptarEditarUsuario()}" icon="ui-icon-check"/>
+                        <p:commandButton type="buttom" value="Cancelar" actionListener="#{beanDialogoEditarUsuario3.apretoCancelar()}"   update="formEdit" icon="ui-icon-close"/>
+
+                    </div>
+                </f:facet>
+
+
+
+
+            </p:dialog>
+
+        </h:form> 
+</div>
+
+        <h:form>
+            <p:remoteCommand name="mostrar1"  actionListener="#{beanDialogoChatDerecha3.seMostro}" />
+            <p:remoteCommand name="ocultar1"  actionListener="#{beanDialogoChatDerecha3.seOculto}" />
+        </h:form>
+        <!-- rendered="# {beanDialogoChatDerecha3.getRender('nada')}" -->
+        <div ><!-- onmousemove="actualizar();" -->
+        <p:dialog  position="#{beanDialogoChatDerecha3.position}" class="dialgo1" onHide="ocultar1();" onShow="mostrar1()" id="#{EA.ID_CHAT_DERECHO}"  widgetVar="#{EA.DLG_CHAT_DERECHO}" width="300" height="200">
+
+            <f:facet  name="header" >
+                <h:form id="#{EA.FORM_CHAT_DERECHO_HEADER}">
+                    <p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;" url="#{beanDialogoChatDerecha3.getDireccionImagenDestinatarioYcrearDeSerNecesario()}" /> 
+                    #{beanDialogoChatDerecha3.getCuentaDestinatario()}
+                </h:form>              </f:facet>
+            <h:form id="#{EA.FORM_CHAT_DERECHO}" style="width:100%; height:100%;" 
+                    onreset="document.getElementById('idChatDerecho_content').scrollTo(0,document.getElementById('idChatDerecho_content').
+scrollHeight);"
+
+                    >
+                <div class="paddSscroll padd sscroll" style="width:100%; height:100%;" >
+
+                    <ul class="chats">
+                        <p:repeat id="pan" value="#{beanDialogoChatDerecha3.getDialogoChat().mensajes}" var="men"
+                                  
+                                  >
+                            <!-- Chat by us. Use the class "by-me". -->
+                            <li id="mensajeActual1" class="#{beanDialogoChatDerecha3.getBay(men)}">
+                                <!-- Use the class "pull-left" in avatar -->
+                                <div class="avatar #{beanDialogoChatDerecha3.getPullImagen(men)}">
+                                    <p:graphicImage id="imagenMensaje1" style="border-radius: 40px;width: 40px;height: 40px;" url="#{beanDialogoChatDerecha3.getDireccionImagen(men)}" /> 
+                                </div>
+
+                                <div class="chat-content">
+
+                                    <!-- In meta area, first include "name" and then "time" -->
+                                    <div class="chat-meta">#{men.usersusernameorigen.username}<i style="#{beanDialogoChatDerecha3.ocultarSiNoEsDePropierarioYNoASidoVisto(men)}"  class="fas fa-check"/> <span class="pull-right">#{beanDialogoChatDerecha3.getDateConFormato(men)}</span></div>
+                                    <!-- <textarea rows="1" style="background-color: white; resize: none; width: 100%; border-top-width: 0px;border-right-width: 0px;border-left-width: 0px;border-bottom-width: 0px;" disabled="true"   ># {men.contenido}</textarea> -->
+                                    <p:inputTextarea readonly="true" id="contenido1" rows="1" style="-moz-box-shadow: inset 0 2px 2px #8f8f8f; -webkit-box-shadow: inset 0 2px 2px #8f8f8f; box-shadow: inset 0 0px 0px #0000; background-color: white; resize: none; width: 100%; border-top-width: 0px;border-right-width: 0px;border-left-width: 0px;border-bottom-width: 0px;"   value="#{men.contenido}" /> 
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+
+                            <!--  disabled="true" --> 
+                            <p:contextMenu id="menuDerechoMensajes" for="contenido1">
+                                <p:menuitem style="#{beanDialogoChatDerecha3.OcultarSiNoEsDeUsuarioActual(men)}" update="#{beanDialogoChatDerecha3.getUpdate()}"  value="Eliminar" actionListener="#{beanDialogoChatDerecha3.eliminarEsteMensaje(men)}" icon="fas fa-comment-slash" >
+                                    <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar Este Mensaje?" icon="ui-icon-alert" />
+                                </p:menuitem>
+                                <p:menuitem actionListener="#{beanDialogoChatDerecha3.verSusPublicacionesOrigen(men)}" style="#{beanDialogoChatDerecha3.OcultarSiEsDeUsuarioActual(men)}" value="Ver Publicaciones"  icon="#{EA.ICON_VER_SUS_PUBLICACIONES}" />
+                            </p:contextMenu>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                              <script>
+                    document.getElementById("idChatDerecho_content").scrollTo(0,document.getElementById("idChatDerecho_content").
+scrollHeight);
+                </script>
+                        </p:repeat>
+                        <!-- Chat by other. Use the class "by-other". -->
+
+                    </ul>
+
+                </div>
+                <script>
+                    document.getElementById("idChatDerecho_content").scrollTo(0,document.getElementById("idChatDerecho_content").
+scrollHeight);
+                </script>
+              <!--  # {beanDialogoChatDerecha3.scrollToEnd()}           -->
+            </h:form>
+
+            <f:facet  name="footer" >
+                <h:form id="#{EA.FORM_CHAT_DERECHO_FOOTER}">
+                    <center> <p:inputTextarea style="width: 72%; margin-right: 4px;" rows="1" value="#{beanDialogoChatDerecha3.getDialogoChat().nuevoMensaje}"  />
+                        <p:commandButton style=" bottom: 5px;"  iconPos="center" icon="far fa-paper-plane" action="#{beanDialogoChatDerecha3.enviarMensaje()}" update="#{beanDialogoChatDerecha3.getUpdate()}" />
+                    </center>
+                </h:form>
+            </f:facet> 
+            <!--  -->
+            <f:facet name="options">
+                <h:form>
+                    <p:menu id="subMenuDialgoDerecha">
+                        <p:submenu label="Opciones">
+                            <!--      <p:menuitem style="# {beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}" value="Chat" icon="fas fa-comments" actionListener="# {beanTodasLasPublicaciones3.abrirChat(car)}"/>
+                                  <p:menuitem id="MISubcribirse" update="subMenuPublicacion" style="# {beanTodasLasPublicaciones3.OcultarSiEstaSubscrito(car)}" value="Subcribirse" actionListener="# {beanTodasLasPublicaciones3.addSubcripcion(car)}" icon="fas fa-user-plus" >
+                                      <p:confirm  header="Confirmacion" message="Estas Seguro de Subscribirte?" icon="ui-icon-alert" />
+                                  </p:menuitem>
+                                  <p:menuitem id="MIDesubcribirse" update="subMenuPublicacion" style="# {beanTodasLasPublicaciones3.OcultarSiNoEstaSubscrito(car)}" value="Desubcribirse" actionListener="# {beanTodasLasPublicaciones3.eliminarSubcripcion(car)}" icon="fas fa-user-times" >
+                                      <p:confirm header="Confirmacion" message="Estas Seguro de Desubscribirte?" icon="ui-icon-alert" />
+                                  </p:menuitem>
+                                  <p:menuitem value="Ver Publicaciones" actionListener="# {beanTodasLasPublicaciones3.verSusPublicaciones(car)}" icon="# {EA.ICON_VER_SUS_PUBLICACIONES}" />
+                                  <p:menuitem style="# {beanTodasLasPublicaciones3.OcultarSiperteneceAUsuarioActual(car)}" update=":form1" value="Eliminar" actionListener="# {beanTodasLasPublicaciones3.EliminarPublicacion(car)}" icon="# {EA.ICON_VER_SUS_PUBLICACIONES}" >
+                                      <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar esta Publicaion?" icon="ui-icon-alert" />
+                                  </p:menuitem>-->
+                            <p:menuitem value="Minizar/Maximizar" url="#" icon="ui-icon-newwin" onclick="PF('#{EA.DLG_CHAT_DERECHO}').toggle()" />
+                            <p:menuitem value="Ocultar" url="#" icon="ui-icon-close" onclick="PF('#{EA.DLG_CHAT_DERECHO}').close()" />
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
+            </f:facet>
+
+
+        </p:dialog>
+
+</div>
+
+
+        <h:form>
+            <p:remoteCommand name="mostrar2"  actionListener="#{beanDialogoChatCentro3.seMostro}" />
+            <p:remoteCommand name="ocultar2"  actionListener="#{beanDialogoChatCentro3.seOculto}" />
+        </h:form>
+        <!-- rendered="# {beanDialogoChatCentro3.getRender('nada')}" -->
+        <div ><!-- onmousemove="actualizar();" -->
+        <p:dialog  position="#{beanDialogoChatCentro3.position}" class="dialgo1" onHide="ocultar2();" onShow="mostrar2()" id="#{EA.ID_CHAT_CENTRO}"  widgetVar="#{EA.DLG_CHAT_CENTRO}" width="300" height="200">
+            <f:facet  name="header" >
+                <h:form id="#{EA.FORM_CHAT_CENTRO_HEADER}">
+                    <p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;"  url="#{beanDialogoChatCentro3.getDireccionImagenDestinatarioYcrearDeSerNecesario()}" /> 
+                    #{beanDialogoChatCentro3.getCuentaDestinatario()}
+                </h:form>              </f:facet>
+            <h:form id="#{EA.FORM_CHAT_CENTRO}" style="width:100%; height:100%;" 
+                    onreset="document.getElementById('idChatCentro_content').scrollTo(0,document.getElementById('idChatCentro_content').
+scrollHeight);"
+                    >
+                <div class="paddSscroll padd sscroll" style="width:100%; height:100%;">
+
+                    <ul class="chats">
+                        <p:repeat id="pan2" value="#{beanDialogoChatCentro3.getDialogoChat().mensajes}" var="men"  >
+                            <!-- Chat by us. Use the class "by-me". -->
+                            <li class="#{beanDialogoChatCentro3.getBay(men)}">
+                                <!-- Use the class "pull-left" in avatar -->
+                                <div class="avatar #{beanDialogoChatCentro3.getPullImagen(men)}">
+                                    <p:graphicImage style="border-radius: 40px;width: 40px;height: 40px;" url="#{beanDialogoChatCentro3.getDireccionImagen(men)}" /> 
+                                </div>
+
+                                <div class="chat-content">
+
+                                    <!-- In meta area, first include "name" and then "time" -->
+                                    <div class="chat-meta">#{men.usersusernameorigen.username}<i style="#{beanDialogoChatCentro3.ocultarSiNoEsDePropierarioYNoASidoVisto(men)}"  class="fas fa-check"/> <span class="pull-right">#{beanDialogoChatCentro3.getDateConFormato(men)}</span></div>
+                                    <!-- <textarea rows="1" style="background-color: white; resize: none; width: 100%; border-top-width: 0px;border-right-width: 0px;border-left-width: 0px;border-bottom-width: 0px;" disabled="true"   ># {men.contenido}</textarea> -->
+                                    <!-- --> <p:inputTextarea id="contenido2" readonly="true" rows="1" style="-moz-box-shadow: inset 0 2px 2px #8f8f8f; -webkit-box-shadow: inset 0 2px 2px #8f8f8f; box-shadow: inset 0 0px 0px #0000; background-color: white; resize: none; width: 100%; border-top-width: 0px;border-right-width: 0px;border-left-width: 0px;border-bottom-width: 0px;"   value="#{men.contenido}" /> 
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+                            <p:contextMenu id="menuDerechoMensajes" for="contenido2">
+                                <p:menuitem style="#{beanDialogoChatCentro3.OcultarSiNoEsDeUsuarioActual(men)}" update="#{beanDialogoChatCentro3.getUpdate()}"  value="Eliminar" actionListener="#{beanDialogoChatCentro3.eliminarEsteMensaje(men)}" icon="fas fa-comment-slash" >
+                                    <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar Este Mensaje?" icon="ui-icon-alert" />
+                                </p:menuitem>
+                                <p:menuitem actionListener="#{beanDialogoChatCentro3.verSusPublicacionesOrigen(men)}" style="#{beanDialogoChatCentro3.OcultarSiEsDeUsuarioActual(men)}" value="Ver Publicaciones"  icon="#{EA.ICON_VER_SUS_PUBLICACIONES}" />
+                            </p:contextMenu>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:repeat>
+                        <!-- Chat by other. Use the class "by-other". -->
+
+                    </ul>
+
+                </div>
+
+                #{beanDialogoChatCentro3.scrollToEnd()}
+            </h:form>
+            <f:facet  name="footer" >
+                <h:form id="#{EA.FORM_CHAT_CENTRO_FOOTER}">
+                    <center> <p:inputTextarea style="width: 72%; margin-right: 4px;" rows="1" value="#{beanDialogoChatCentro3.getDialogoChat().nuevoMensaje}"  />
+                        <p:commandButton style=" bottom: 5px;" iconPos="center"  icon="far fa-paper-plane" action="#{beanDialogoChatCentro3.enviarMensaje()}" update="#{beanDialogoChatCentro3.getUpdate()}" />
+                    </center>
+                </h:form>
+            </f:facet> 
+
+
+        </p:dialog>
+</div>
+
+
+
+        <h:form>
+            <p:remoteCommand name="mostrar3"  actionListener="#{beanDialogoChatIsquierda3.seMostro}" />
+            <p:remoteCommand name="ocultar3"  actionListener="#{beanDialogoChatIsquierda3.seOculto}" />
+        </h:form>
+        <!-- rendered="# {beanDialogoChatIsquierda3.getRender('nada')}" -->
+        <div ><!-- onmousemove="actualizar();" -->
+        <p:dialog  position="#{beanDialogoChatIsquierda3.position}" class="dialgo1" onHide="ocultar3();" onShow="mostrar3()" id="#{EA.ID_CHAT_ISQUIERDO}"  widgetVar="#{EA.DLG_CHAT_ISQUIERDO}" width="300" height="200">
+            <f:facet  name="header" >
+                <h:form id="#{EA.FORM_CHAT_ISQUIERDO_HEADER}">
+                    <p:graphicImage style="border-radius: 10px;width: 20px;height: 20px;" url="#{beanDialogoChatIsquierda3.getDireccionImagenDestinatarioYcrearDeSerNecesario()}" /> 
+                    #{beanDialogoChatIsquierda3.getCuentaDestinatario()}
+                </h:form>         </f:facet>
+            <h:form id="#{EA.FORM_CHAT_ISQUIERDO}" style="width:100%; height:100%;"
+                    onreset="document.getElementById('idChatIsquierdo_content').scrollTo(0,document.getElementById('idChatIsquierdo_content').
+scrollHeight);"
+                    >
+                <div class="paddSscroll padd sscroll" style="width:100%; height:100%;">
+
+                    <ul class="chats">
+                        <p:repeat id="pan3" value="#{beanDialogoChatIsquierda3.getDialogoChat().mensajes}" var="men"  >
+                            <!-- Chat by us. Use the class "by-me". -->
+                            <li class="#{beanDialogoChatIsquierda3.getBay(men)}">
+                                <!-- Use the class "pull-left" in avatar -->
+                                <div class="avatar #{beanDialogoChatIsquierda3.getPullImagen(men)}">
+                                    <p:graphicImage style="border-radius: 40px;width: 40px;height: 40px;" url="#{beanDialogoChatIsquierda3.getDireccionImagen(men)}" /> 
+                                </div>
+
+                                <div class="chat-content">
+
+                                    <!-- In meta area, first include "name" and then "time" -->
+                                    <div class="chat-meta">#{men.usersusernameorigen.username}<i style="#{beanDialogoChatIsquierda3.ocultarSiNoEsDePropierarioYNoASidoVisto(men)}"  class="fas fa-check"/> <span class="pull-right">#{beanDialogoChatDerecha3.getDateConFormato(men)}</span></div>
+                                    <!-- <textarea rows="1" style="background-color: white; resize: none; width: 100%; border-top-width: 0px;border-right-width: 0px;border-left-width: 0px;border-bottom-width: 0px;" disabled="true"   ># {men.contenido}</textarea> -->
+                                    <!-- --> <p:inputTextarea id="contenido3" readonly="true" rows="1" style="-moz-box-shadow: inset 0 2px 2px #8f8f8f; -webkit-box-shadow: inset 0 2px 2px #8f8f8f; box-shadow: inset 0 0px 0px #0000; background-color: white; resize: none; width: 100%; border-top-width: 0px;border-right-width: 0px;border-left-width: 0px;border-bottom-width: 0px;"   value="#{men.contenido}" /> 
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+                            <p:contextMenu id="menuDerechoMensajes" for="contenido3">
+                                <p:menuitem style="#{beanDialogoChatIsquierda3.OcultarSiNoEsDeUsuarioActual(men)}" update="#{beanDialogoChatIsquierda3.getUpdate()}"  value="Eliminar" actionListener="#{beanDialogoChatIsquierda3.eliminarEsteMensaje(men)}" icon="fas fa-comment-slash" >
+                                    <p:confirm  header="Confirmacion" message="Estas Seguro de Eliminar Este Mensaje?" icon="ui-icon-alert" />
+                                </p:menuitem>
+                                <p:menuitem style="#{beanDialogoChatIsquierda3.OcultarSiEsDeUsuarioActual(men)}" actionListener="#{beanDialogoChatIsquierda3.verSusPublicacionesOrigen(men)}" value="Ver Publicaciones"  icon="#{EA.ICON_VER_SUS_PUBLICACIONES}" />
+                            </p:contextMenu>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:repeat>
+                        <!-- Chat by other. Use the class "by-other". -->
+
+                    </ul>
+
+                </div>
+                #{beanDialogoChatIsquierda3.scrollToEnd()}
+            </h:form>
+
+            <f:facet  name="footer" >
+                <h:form id="#{EA.FORM_CHAT_ISQUIERDO_FOOTER}">
+                    <center> <p:inputTextarea style="width: 72%; margin-right: 4px;" rows="1" value="#{beanDialogoChatIsquierda3.getDialogoChat().nuevoMensaje}"  />
+                        <p:commandButton style=" bottom: 5px;" iconPos="center"  icon="far fa-paper-plane" action="#{beanDialogoChatIsquierda3.enviarMensaje()}" update="#{beanDialogoChatIsquierda3.getUpdate()}" />
+                    </center>
+                </h:form>
+            </f:facet> 
+
+
+        </p:dialog>
+</div>
+        <style>
+            .columLabel{
+                width: 20%;
+            }
+            .columContent{
+                width: 30%;
+            }
+        </style>
+        <div ><!-- onmousemove="actualizar();" -->
+                <h:form id="FormInfo">
+                    #{beanDialogoInfoUsuario3.resetear()}
+                    <p:dialog header="Informacion de Usuario" widgetVar="#{EA.DLG_INFO_USUARIO_GESTION}" width="900"
+                              showEffect="bounce" draggable="false" resizable="false"
+                              modal="true" closable="false"
+
+                              >
+
+
+                        <h:panelGrid  style="width: 100%" cellpadding="10" cellspacing="5" columns="4" columnClasses="columLabel , columContent , columLabel , columContent">
+                            <h:outputText value="Usuario:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.usuarioAdd.nombre}"/>
+
+                            <h:outputText value="Cuenta:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.usuarioAdd.username}"/>
+
+                            
+                            
+                            <h:outputText value="apellido1:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.usuarioAdd.apellido1}"/>
+
+                            <h:outputText value="apellido2:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.usuarioAdd.apellido2}"/>
+
+                            <h:outputText value="Identifiacdor:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.usuarioAdd.identificacion}"/>
+
+                            
+                            <h:outputText value="email:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.usuarioAdd.email}"/>
+
+                            <h:outputText value="enable:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.usuarioAdd.enabled}"/>
+
+                            
+                            <h:outputText value="Rol:"/>
+                            <h:outputText  value="#{beanDialogoInfoUsuario3.getRolUsuarioAdd()}"/>
+
+                            
+                            
+                           
+                        </h:panelGrid>
+                         <div style="margin-bottom: 20px;" ><center> <h:outputText  value="Descripci&oacute;n"/> <br/></center></div> 
+
+                         <p:inputTextarea readonly="true" style="-moz-box-shadow: inset 0 2px 2px #8f8f8f; -webkit-box-shadow: inset 0 2px 2px #8f8f8f; box-shadow: inset 0 0px 0px #0000; background-color: white; resize: none;border-top-width: 0px;border-right-width: 0px;border-left-width: 0px;border-bottom-width: 0px; width: 95%" value="#{beanDialogoInfoUsuario3.usuarioAdd.description}"/>
+
+                         <!--  <h:outputText value="# {beanDialogoInfoUsuario3.usuarioAdd.description}"/> -->
+                        <f:facet name="footer">
+                            <div class="text-center">
+                                <p:commandButton update=":form"  onclick="PF('#{EA.DLG_INFO_USUARIO_GESTION}').hide()" value="Aceptar" type="reset" icon="ui-icon-close"/>
+                            </div>
+                        </f:facet>
+                    </p:dialog>
+
+                </h:form>
+            
+                  <h:form id="forAddServidor" >
+            <p:growl id="msgAddServidor"/>
+            #{beanDialgoAgregarServidor3.resetear()}
+            <p:dialog header="Agregar Direccion" widgetVar="#{EA.DLG_AGREGAR_SERVIDOR}" width="500"
+                      showEffect="bounce" draggable="false" resizable="false"
+                      modal="true" closable="false">
+                    <center>
+                        <p:inputNumber class="entradaIP" id="Primera_Direccion" value="#{beanDialgoAgregarServidor3.a}" maxlength="3" maxValue="255" minValue="0" decimalPlaces="0" required="true" requiredMessage="Solo numeros entre 0 y 255" />
+                    <h:outputText  value="."/>
+                    <p:inputNumber class="entradaIP" id="Segunda_Direccion" value="#{beanDialgoAgregarServidor3.b}" maxlength="3" maxValue="255" minValue="0" decimalPlaces="0" required="true" requiredMessage="Solo numeros entre 0 y 255"/>
+                    <h:outputText value="."/>
+                    <p:inputNumber class="entradaIP"   id="Tercera_Direccion" value="#{beanDialgoAgregarServidor3.c}" maxlength="3" maxValue="255" minValue="0" decimalPlaces="0" required="true" requiredMessage="Solo numeros entre 0 y 255" />
+                    <h:outputText value="."/>
+                    <p:inputNumber  class="entradaIP"  id="Cuarta_Direccion" value="#{beanDialgoAgregarServidor3.d}" maxlength="3" maxValue="255" minValue="0" decimalPlaces="0" required="true" requiredMessage="Solo numeros entre 0 y 255"/>
+                    </center>
+                
+                <style>
+                    
+                    .entradaIP input {
+                       width: 40px;
+                    }
+                </style>
+
+               
+                <f:facet name="footer">
+                    <div style="text-align: right;">
+                        <p:commandButton type="submit" value="Agregar" action="#{beanDialgoAgregarServidor3.apretoAgregar()}"  update="#{beanDialgoAgregarServidor3.getUpdateAceptar()}" icon="ui-icon-check">
+
+                        </p:commandButton>
+                        <p:commandButton type="buttom" value="Cancelar" actionListener="#{beanDialgoAgregarServidor3.apretoCancelar()}"   update=":forAddServidor" icon="ui-icon-close"/>
+
+                    </div>
+                </f:facet>
+
+
+
+
+            </p:dialog>
+
+        </h:form> 
+
+                
+</div>
+         <style>
+                                .iconoTopCrear .ui-button-icon-left{
+                                    margin-top: -9px !important;
+                                }
+                                .MITopGestionarUsuario .ui-menuitem-text{
+                                    font-size: medium;
+                                }
+                            </style>
+        <script>
+            setInterval(function (){ actualizar();},5000);
+            
+        </script>
+        
+    </h:body>
+
+</html>

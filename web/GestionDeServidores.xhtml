@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <!-- forAdd  formEdit -->
+        <ui:composition template="./Principal.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="form">
+                    
+                    <p:importConstants id="id1" type="Util.EAc" var="EA" />
+                    <p:growl id="msg" globalOnly="false" />
+                    #{beanGestionDeServidores3.resetear()}
+                    #{beanGestionDeServidores3.setEsDialogoAgregarDeServidoresTrue()}
+                    <p:dataTable widgetVar="datosUsuarios" value="#{beanGestionDeServidores3.lista}" var="p" paginator="true" rows="6" editable="true" 
+
+                                 >
+                        <p:ajax event="rowEdit" listener="#{beanGestionDeServidores3.actualizar}" update=":form:msg"/>
+                        <p:ajax event="rowEditCancel" listener="#{beanGestionDeServidores3.cancelar}" update=":form:msg"/>
+
+                        <f:facet name="header">
+
+                        </f:facet>
+
+                        <p:column headerText="Seleccionar">
+                            <center>
+
+                                <p:selectBooleanCheckbox class="text-center" value="#{p.selected}"/>
+                            </center>
+
+                        </p:column>
+                        <p:column headerText="Direccion" >
+                            <center>
+
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText class="text-center" value="#{p.servidor.ip}"  />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <h:inputText value="#{beanGestionDeServidores3.servidorEnLista.ip}"  />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </center>
+
+                        </p:column>
+                       
+
+                        <p:column headerText="Opciones">
+                            <style>
+                                .ui-button-icon-only .ui-icon.fa{
+                                    padding-bottom: 5px;padding-right: 5px;
+                                }
+                            </style>
+<!--                            <p:commandButton  update=":FormInfo" actionListener="# {beanGestionDeUsuarios3.apretoVerInf(p.users.username)}" icon="fa fa-exclamation-circle" >
+                          
+                            </p:commandButton>
+                            <p:commandButton update=":form :formEdit" actionListener="# {beanGestionDeUsuarios3.apretoEditar(p.users.username)}"  icon="ui-icon-pencil" >
+                            </p:commandButton>-->
+                            <p:commandButton action="#{beanGestionDeServidores3.eliminar(p.servidor)}" update=":form  :formEast2" icon="ui-icon-trash"> 
+                                <!-- -->   <p:confirm message="¿Seguro que quiere eliminar esta direccion?" header="Aviso" icon="ui-icon-alert"/> 
+                            </p:commandButton>
+                        </p:column>
+
+
+
+
+                        <f:facet name="footer">
+
+
+                        </f:facet>
+
+                    </p:dataTable>
+                    <br/>
+                    <p:commandButton value="Eliminar" action="#{beanGestionDeServidores3.eliminar()}" update=":form :formEast2" icon="ui-icon-trash">
+                        <!-- -->  <p:confirm message="Seguro eliminar?" header="Aviso" icon="ui-icon-alert"/> 
+                    </p:commandButton>
+
+                    <p:commandButton value="Adicionar" update=":forAddServidor " action="#{beanGestionDeServidores3.showDialogAdd()}"  icon="ui-icon-plus"/>
+                    <p:confirmDialog global="true" >
+                        <p:commandButton value="si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>
+                        <p:commandButton value="no" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-no"/>
+                    </p:confirmDialog>
+                </h:form>
+
+
+                
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
